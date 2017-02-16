@@ -1,7 +1,7 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import 'rxjs/add/operator/toPromise';
-
+import { FormsModule }   from '@angular/forms';
 import { MyApp } from './app.component';
 import { MessagePage } from '../pages/message/message';
 import { ApplicationPage } from '../pages/application/application';
@@ -11,8 +11,12 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { MoreApplicationPage } from '../pages/more-application/more-application';
 import { BookLibraryPage } from '../pages/book-library/book-library';
 
+import { WorksPage } from '../pages/work/works/works';
+import { WorkPage } from '../pages/work/work11/work';
+
 import { EGridComponent } from '../components/e-grid/e-grid';
 import { DataService } from '../services/data.service';
+import { ValidateService } from '../services/validate.service';
 
 @NgModule({
   declarations: [
@@ -24,10 +28,12 @@ import { DataService } from '../services/data.service';
     MePage,
     EGridComponent,
     MoreApplicationPage,
-    BookLibraryPage
+    BookLibraryPage,
+    WorksPage,
+    WorkPage
   ],
   imports: [
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),FormsModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -38,8 +44,10 @@ import { DataService } from '../services/data.service';
     NamesPage,
     MePage,
     MoreApplicationPage,
-    BookLibraryPage
+    BookLibraryPage,
+    WorksPage,
+    WorkPage
   ],
-  providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler }, DataService]
+  providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler }, DataService, ValidateService]
 })
 export class AppModule { }

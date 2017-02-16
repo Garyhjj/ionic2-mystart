@@ -1,0 +1,21 @@
+.alert{
+  font-size:50%;
+  color:red;
+}
+.has-error{
+  color: #a94442;
+}
+.has-success{
+  color: #387ef5;
+}
+.main{
+  position:relative;
+  .layer{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 100;
+  }
+}

@@ -1,0 +1,17 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>works</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list *ngIf="works">
+  <button ion-item *ngFor="let item of works" (click)="itemSelected(item)">
+    {{ item.name }}
+  </button>
+</ion-list>
+</ion-content>
