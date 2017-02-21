@@ -1,3 +1,15 @@
-page-message {
-
+.pull-left{
+  float:left;
+  clear: both;
+}
+.pull-right{
+  float:right;
+  clear: both;
+}
+.chatarea{
+  position: absolute;
+  z-index: 100;
+  bottom:0%;
+  left:0%;
+  display: flex;
 }

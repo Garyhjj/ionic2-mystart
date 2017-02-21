@@ -14,6 +14,9 @@ import { BookLibraryPage } from '../pages/book-library/book-library';
 import { WorksPage } from '../pages/work/works/works';
 import { WorkPage } from '../pages/work/work11/work';
 
+import { SetPage } from '../pages/me/set/set';
+import { MyDetailPage } from '../pages/me/my-detail/my-detail';
+
 import { EGridComponent } from '../components/e-grid/e-grid';
 import { DataService } from '../services/data.service';
 import { ValidateService } from '../services/validate.service';
@@ -30,7 +33,9 @@ import { ValidateService } from '../services/validate.service';
     MoreApplicationPage,
     BookLibraryPage,
     WorksPage,
-    WorkPage
+    WorkPage,
+    SetPage,
+    MyDetailPage
   ],
   imports: [
     IonicModule.forRoot(MyApp),FormsModule
@@ -46,7 +51,9 @@ import { ValidateService } from '../services/validate.service';
     MoreApplicationPage,
     BookLibraryPage,
     WorksPage,
-    WorkPage
+    WorkPage,
+    SetPage,
+    MyDetailPage
   ],
   providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler }, DataService, ValidateService]
 })

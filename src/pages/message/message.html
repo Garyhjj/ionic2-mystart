@@ -9,5 +9,13 @@
     <ion-title>消息</ion-title>
   </ion-navbar>
 </ion-header>
-<ion-content padding>
+<ion-content padding class="mymess">
+  <div class="" [innerHTML]="fdg" >
+  </div>
+  <div class="chatarea">
+    <input type="text" placeholder="说点什么吧..." #mes>
+    <button  ion-button (click)="send2(mes)">发送</button>
+    <button  ion-button (click)="send3(mes)">发送</button>
+  </div>
+
 </ion-content>

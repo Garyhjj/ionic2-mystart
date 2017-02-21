@@ -12,7 +12,12 @@ export class WorkPage{
     public navParams: NavParams,
     private formBuilder: FormBuilder,
     private validateService: ValidateService
-   ) {}
+   ) {
+     this.tabBarElement = document.querySelector('.tabbar.show-tabbar');
+   }
+
+
+   tabBarElement:any;
 
   canEdit:boolean = false;
   work:any;
@@ -30,6 +35,12 @@ export class WorkPage{
     this.work = this.navParams.data.item;
     this.todo = this.initWork(this.work);
     this.save();
+    console.log(111)
+    this.tabBarElement.style.display = 'none';
+
+  }
+  ionViewWillLeave() {
+    this.tabBarElement.style.display = 'flex';
   }
   //初始化原始數據
   initWork(work):FormGroup{

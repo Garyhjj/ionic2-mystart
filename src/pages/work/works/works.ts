@@ -17,13 +17,17 @@ export class WorksPage implements OnInit{
 
   ngOnInit(){
     this.dataService.getWorks().then((works) => this.works = works);
+    this.tabBarElement = document.querySelector('.tabbar.show-tabbar');
   }
+  tabBarElement:any;
   works:any;
   ionViewDidLoad() {
     console.log('ionViewDidLoad Works1');
-
+    this.tabBarElement.style.display = 'none';
   }
-
+  ionViewWillLeave() {
+    this.tabBarElement.style.display = 'flex';
+  }
   itemSelected(item:any){
     this.navCtrl.push(WorkPage, {
             item: item
