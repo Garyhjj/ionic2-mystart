@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { ActionSheetController } from 'ionic-angular';
+import { Camera } from 'ionic-native';
 /*
   Generated class for the BookLibrary page.
 
@@ -12,19 +13,17 @@ import { ActionSheetController } from 'ionic-angular';
 })
 export class MyDetailPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private actionSheetCtrl:ActionSheetController) {
-    this.tabBarElement = document.querySelector('.tabbar.show-tabbar');
+  constructor(public navCtrl: NavController, public navParams: NavParams, private actionSheetCtrl: ActionSheetController) {
   }
-  user:any;
+  user: any;
+  base64Image: string;
+
   ionViewDidLoad() {
-    this.user=this.navParams.data.user;
-    this.tabBarElement.style.display = 'none';
+    this.user = this.navParams.data.user;
   }
 
-  tabBarElement:any;
 
   ionViewWillLeave() {
-    this.tabBarElement.style.display = 'flex';
   }
 
   changePhoto() {
@@ -34,14 +33,24 @@ export class MyDetailPage {
         {
           text: '拍照',
           handler: () => {
-            console.log('Destructive clicked');
+            Camera.getPicture({
+              destinationType: Camera.DestinationType.DATA_URL,
+              targetWidth: 1000,
+              targetHeight: 1000
+            }).then((imageData) => {
+              // imageData is a base64 encoded string
+              this.base64Image = "data:image/jpeg;base64," + imageData;
+              this.user.photo = this.base64Image;
+            }, (err) => {
+              console.log(err);
+            });
           }
-        },{
+        }, {
           text: '从相册选择',
           handler: () => {
             console.log('Archive clicked');
           }
-        },{
+        }, {
           text: '取消',
           role: '取消',
           handler: () => {

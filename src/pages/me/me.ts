@@ -28,7 +28,7 @@ export class MePage {
 
   user:User={
     name:"杨元文",
-    photo:"../assets/images/head.jpg",
+    photo:"assets/images/head.jpg",
     secDim:"",
     mobile:12345678910,
     telephone:12345678,
@@ -37,10 +37,10 @@ export class MePage {
     department:"维森集团/集团总经办"
   }
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
-
+  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  }
   ionViewDidLoad() {
-    
+
   }
   toSet():void{
     this.navCtrl.push(SetPage, {

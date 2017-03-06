@@ -66,70 +66,70 @@ export class DataService {
     items: ApplicationItem[] = [{
         id: 1,
         href: '#',
-        src: '../../assets/icon/book.ico',
+        src: 'assets/icon/book.ico',
         name: '图书管理',
         group: '工作相关',
         show: true
     }, {
         id: 2,
         href: '#',
-        src: '../../assets/icon/todo.ico',
+        src: 'assets/icon/todo.ico',
         name: '待办事宜',
         group: '工作相关',
         show: true
     }, {
         id: 3,
         href: '#',
-        src: '../../assets/icon/finish.ico',
+        src: 'assets/icon/finish.ico',
         name: '已办事宜',
         group: '工作相关',
         show: true
     }, {
         id: 4,
         href: '#',
-        src: '../../assets/icon/meeting.ico',
+        src: 'assets/icon/meeting.ico',
         name: '会议',
         group: '企业应用',
         show: true
     }, {
         id: 5,
         href: '#',
-        src: '../../assets/icon/schedule.ico',
+        src: 'assets/icon/schedule.ico',
         name: '日程',
         group: '企业应用',
         show: true
     }, {
         id: 6,
         href: '#',
-        src: '../../assets/icon/news.ico',
+        src: 'assets/icon/news.ico',
         name: '新闻',
         group: '企业应用',
         show: true
     }, {
         id: 7,
         href: '#',
-        src: '../../assets/icon/document.ico',
+        src: 'assets/icon/document.ico',
         name: '文档',
         group: '即时沟通',
         show: true
     }, {
         id: 8,
         href: '#',
-        src: '../../assets/icon/weibo.ico',
+        src: 'assets/icon/weibo.ico',
         name: '微博',
         group: '商务出行',
         show: true
     }, {
         id: 9,
         href: '#',
-        src: '../../assets/icon/teamwork.ico',
+        src: 'assets/icon/teamwork.ico',
         name: '协作',
         group: '商务出行',
         show: false
     }, {
         id: 10,
         href: '#',
-        src: '../../assets/icon/location.ico',
+        src: 'assets/icon/location.ico',
         name: '移动签到',
         group: '即时沟通',
         show: false

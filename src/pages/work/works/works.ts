@@ -22,7 +22,8 @@ export class WorksPage implements OnInit{
   tabBarElement:any;
   works:any;
   ionViewDidLoad() {
-    console.log('ionViewDidLoad Works1');
+  }
+  ionViewWillEnter() {
     this.tabBarElement.style.display = 'none';
   }
   ionViewWillLeave() {

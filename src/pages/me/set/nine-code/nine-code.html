@@ -1,0 +1,25 @@
+<ion-header color="mac" [class.head]='isVal' id='headCode'>
+  <ion-navbar color="mac" *ngIf="!isVal">
+    <ion-title>手势密码</ion-title>
+  </ion-navbar>
+  <div class="nav-head">
+    <div class="pagehead" *ngIf="isVal">
+      <ion-avatar class="person" *ngIf="isVal">
+        <img src="assets/images/head.jpg">
+      </ion-avatar>
+      <div class="message first">杨元文</div>
+      <div class="message tip">{{message}}</div>
+    </div>
+  </div>
+</ion-header>
+
+
+<ion-content>
+  <canvas id="lockCanvas"></canvas>
+
+  <ion-card *ngIf="!isVal && message">
+    <ion-card-content>
+      {{message}}
+    </ion-card-content>
+  </ion-card>
+</ion-content>

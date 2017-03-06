@@ -6,7 +6,6 @@ import { DataService } from '../../services/data.service';
 import { MoreApplicationPage } from '../more-application/more-application';
 import { MyRouter } from '../../router/router';
 
-
 @Component({
   selector: 'page-application',
   templateUrl: 'application.html'

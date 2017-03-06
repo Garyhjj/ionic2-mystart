@@ -15,6 +15,7 @@ import { WorksPage } from '../pages/work/works/works';
 import { WorkPage } from '../pages/work/work11/work';
 
 import { SetPage } from '../pages/me/set/set';
+import { NineCodePage } from '../pages/me/set/nine-code/nine-code';
 import { MyDetailPage } from '../pages/me/my-detail/my-detail';
 
 import { EGridComponent } from '../components/e-grid/e-grid';
@@ -35,10 +36,11 @@ import { ValidateService } from '../services/validate.service';
     WorksPage,
     WorkPage,
     SetPage,
-    MyDetailPage
+    MyDetailPage,
+    NineCodePage
   ],
   imports: [
-    IonicModule.forRoot(MyApp),FormsModule
+    IonicModule.forRoot(MyApp,{tabsHideOnSubPages: true}),FormsModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -53,7 +55,8 @@ import { ValidateService } from '../services/validate.service';
     WorksPage,
     WorkPage,
     SetPage,
-    MyDetailPage
+    MyDetailPage,
+    NineCodePage
   ],
   providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler }, DataService, ValidateService]
 })

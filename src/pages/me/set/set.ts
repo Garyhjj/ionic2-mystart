@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { NineCodePage }  from './nine-code/nine-code';
 /*
   Generated class for the BookLibrary page.
 
@@ -12,16 +13,18 @@ import { NavController, NavParams } from 'ionic-angular';
 export class SetPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.tabBarElement = document.querySelector('.tabbar.show-tabbar');
   }
-
-  tabBarElement:any;
 
   ionViewDidLoad() {
-    this.tabBarElement.style.display = 'none';
+  }
+  ionViewWillEnter() {
+
   }
   ionViewWillLeave() {
-    this.tabBarElement.style.display = 'flex';
+
   }
 
+  toNineCode():void {
+    this.navCtrl.push(NineCodePage);
+  }
 }

@@ -35,9 +35,9 @@ export class WorkPage{
     this.work = this.navParams.data.item;
     this.todo = this.initWork(this.work);
     this.save();
-    console.log(111)
+  }
+  ionViewWillEnter() {
     this.tabBarElement.style.display = 'none';
-
   }
   ionViewWillLeave() {
     this.tabBarElement.style.display = 'flex';
@@ -56,7 +56,6 @@ export class WorkPage{
   save():void{
     this.canEdit = false;
     this.tempWork = this.todo.value;
-    console.log(this.tempWork)
   }
   callBack():void{
     this.canEdit = false;

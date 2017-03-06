@@ -5,42 +5,42 @@ $headImgSize3: 150px;
   height:40%;
   color: #fff;
   font-size: 150%;
-  .nav-head{
+}
+.nav-head{
+  height:100%;
+  background-color: #3773F7;
+  position: relative;
+  text-align: center;
+  .headicon{
+    font-size:220%;
+    position: absolute;
+    right:5%;
+    top:15%;
+  }
+  .pagehead{
     height:100%;
-    background-color: #387ef5;
-    position: relative;
-    text-align: center;
-    .headicon{
-      font-size:220%;
+    width:100%;
+    position: absolute;
+    top: +15%;
+    z-index: 100;
+    .person{
+      overflow: hidden;
+      width:$headImgSize3;
+      height:$headImgSize3;
+      border-radius: 2*$headImgSize3;
+      margin-left: -$headImgSize3/2;
       position: absolute;
-      right:5%;
-      top:15%;
-    }
-    .pagehead{
-      height:100%;
-      width:100%;
-      position: absolute;
-      top: +15%;
-      z-index: 100;
-      .person{
-        overflow: hidden;
-        width:$headImgSize3;
-        height:$headImgSize3;
-        border-radius: 2*$headImgSize3;
-        margin-left: -$headImgSize3/2;
-        position: absolute;
-        left:50%;
-        border: solid 2px #fff;
-        img{
-          width:100%;
-          height:100%;
-        }
+      left:50%;
+      border: solid 2px #fff;
+      img{
+        width:100%;
+        height:100%;
       }
-      .message{
-        margin-top: 2%;
-        &.first{
-          margin-top: $headImgSize3*1.1;
-        }
+    }
+    .message{
+      margin-top: 2%;
+      &.first{
+        margin-top: $headImgSize3*1.1;
       }
     }
   }
@@ -106,11 +106,11 @@ $headImgSize3: 150px;
 /* 定義阿里圖庫 */
 @font-face {
   font-family: 'iconfontyyy';  /* project id 234366 */
-  src: url('//at.alicdn.com/t/font_hipha30qqjvsfw29.eot');
-  src: url('//at.alicdn.com/t/font_hipha30qqjvsfw29.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_hipha30qqjvsfw29.woff') format('woff'),
-  url('//at.alicdn.com/t/font_hipha30qqjvsfw29.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_hipha30qqjvsfw29.svg#iconfont') format('svg');
+  src: url('http://at.alicdn.com/t/font_hipha30qqjvsfw29.eot');
+  src: url('http://at.alicdn.com/t/font_hipha30qqjvsfw29.eot?#iefix') format('embedded-opentype'),
+  url('http://at.alicdn.com/t/font_hipha30qqjvsfw29.woff') format('woff'),
+  url('http://at.alicdn.com/t/font_hipha30qqjvsfw29.ttf') format('truetype'),
+  url('http://at.alicdn.com/t/font_hipha30qqjvsfw29.svg#iconfont') format('svg');
 }
 
 .iconfontyyy{
