@@ -1,4 +1,4 @@
-<ion-header color="mac" [class.head]='isVal' id='headCode'>
+<ion-header [class.head]='isVal' [class.secHead]='!isVal' id='headCode'>
   <ion-navbar color="mac" *ngIf="!isVal">
     <ion-title>手势密码</ion-title>
   </ion-navbar>
@@ -16,7 +16,20 @@
 
 <ion-content>
   <canvas id="lockCanvas"></canvas>
-
+  <ion-grid *ngIf="isVal">
+    <ion-row>
+      <ion-col width-50>
+        <ion-buttons left *ngIf="isVal">
+          <button ion-button>登录其它账号</button>
+        </ion-buttons>
+      </ion-col>
+      <ion-col width-50>
+        <ion-buttons right>
+          <button ion-button>忘记手势密码</button>
+        </ion-buttons>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
   <ion-card *ngIf="!isVal && message">
     <ion-card-content>
       {{message}}

@@ -12,6 +12,7 @@ export class MyApp {
   rootPage:any = NineCodePage;
 
   constructor(platform: Platform) {
+    console.log(localStorage.getItem('myNineCode'))
     localStorage.setItem('isPassNineCode','false');
     if(!localStorage.getItem('myNineCode')){
       localStorage.setItem('myNineCode','036');
