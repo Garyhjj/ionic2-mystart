@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { Platform } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 
-import { TabsPage } from '../pages/tabs/tabs';
 import { NineCodePage } from '../pages/me/set/nine-code/nine-code';
 
 @Component({
@@ -13,6 +12,7 @@ export class MyApp {
 
   constructor(platform: Platform) {
     console.log(localStorage.getItem('myNineCode'))
+    //设置手势密码页面为登录验证功能
     localStorage.setItem('isPassNineCode','false');
     if(!localStorage.getItem('myNineCode')){
       localStorage.setItem('myNineCode','036');
