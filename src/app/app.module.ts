@@ -40,7 +40,10 @@ import { ValidateService } from '../services/validate.service';
     NineCodePage
   ],
   imports: [
-    IonicModule.forRoot(MyApp,{tabsHideOnSubPages: true}),FormsModule
+    IonicModule.forRoot(MyApp,{
+      tabsHideOnSubPages: true,
+      backButtonText: '',
+    }),FormsModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
