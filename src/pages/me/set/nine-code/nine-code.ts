@@ -18,7 +18,7 @@ export class NineCodePage {
   OffsetX: number = 30;
   OffsetY: number = 30;
   circleArr = [];
-  message:string = '请输入原来的密码';
+  message:string;
   canChange:boolean;
   isVal:boolean = true;
   headHeight:number;
@@ -27,6 +27,7 @@ export class NineCodePage {
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     // 判定是否是进行验证功能还是更改功能
     this.isVal = localStorage.getItem('isPassNineCode')=='false'? true: false;
+    this.message = this.isVal? '请验证手势密码': '请输入原来的密码';
   }
 
 
