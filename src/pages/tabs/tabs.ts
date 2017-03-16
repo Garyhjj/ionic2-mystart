@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-
+import { Component, ViewChild } from '@angular/core';
+ import {Tabs} from "ionic-angular";
 import { MessagePage } from '../message/message';
 import { ApplicationPage } from '../application/application';
 import { NamesPage } from '../names/names';
@@ -9,6 +9,7 @@ import { MePage } from '../me/me';
   templateUrl: 'tabs.html'
 })
 export class TabsPage {
+  @ViewChild('mainTabs') tabs:Tabs;
   // this tells the tabs component which Pages
   // should be each tab's root Page
   tab1Root: any = MessagePage;

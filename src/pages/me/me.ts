@@ -10,11 +10,12 @@ import { MyDetailPage } from './my-detail/my-detail';
 */
 
 class User{
+  _id : string;
   name:string;
   photo:string;
   secDim:string;
   mobile:number;
-  telephone:number;
+  telephone:string;
   mail:string;
   position:string;
   department:string;
@@ -26,21 +27,20 @@ class User{
 })
 export class MePage {
 
-  user:User={
-    name:"杨元文",
-    photo:"assets/images/head.jpg",
-    secDim:"",
-    mobile:12345678910,
-    telephone:12345678,
-    mail:"123@163.com",
-    position:"总经理",
-    department:"维森集团/集团总经办"
-  }
-
+  user:User;
+  url : string = 'http://10.86.21.46:3700/';
+  serverPhoto:string;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
   ionViewDidLoad() {
-
+    this.user = JSON.parse(localStorage.getItem('user'));
+    this.serverPhoto = this.url + this.user.photo;
+  }
+  ionViewWillEnter() {
+    if(localStorage.getItem('newPicture')){
+      this.serverPhoto = localStorage.getItem('newPicture');
+      localStorage.removeItem('newPicture');
+    }
   }
   toSet():void{
     this.navCtrl.push(SetPage, {
@@ -49,8 +49,8 @@ export class MePage {
   }
 
   toMyDetail():void{
-    this.navCtrl.push(MyDetailPage, {
-      user:this.user,
+    this.navCtrl.push(MyDetailPage,{
+      photo:this.serverPhoto
     });
   }
 

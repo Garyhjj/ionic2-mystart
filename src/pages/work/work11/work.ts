@@ -77,6 +77,7 @@ export class WorkPage{
         y++;
       }
     }
+    this.work = this.tempWork;
   }
 
   //單獨輸入塊驗證

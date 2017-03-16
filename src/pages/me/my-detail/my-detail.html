@@ -10,17 +10,17 @@
     <button ion-item>
           头像
           <ion-note item-right class="person" (click)="changePhoto()">
-           <img [src]="user.photo">
+           <img [src]="serverPhoto">
           </ion-note>
       </button>
 
-    <button ion-item>
+    <button ion-item >
           姓名
           <ion-note item-right>
           {{user.name}}
           </ion-note>
       </button>
-    <button ion-item>
+    <button ion-item (click) = "showQr()">
          我的二维码
           <ion-note item-right>
           <i class="iconfontyyy">&#xe613;</i>
@@ -29,19 +29,19 @@
 
     <ion-item-divider color="light"></ion-item-divider>
 
-    <button ion-item>
+    <button ion-item (click) = "changM('手机号码' , user.mobile)">
         手机
         <ion-note item-right>
         {{user.mobile}}
         </ion-note>
     </button>
-    <button ion-item>
+    <button ion-item (click) = "changM('固话号码', user.telephone)">
         电话
         <ion-note item-right>
         {{user.telephone}}
         </ion-note>
     </button>
-    <button ion-item>
+    <button ion-item (click) = "changM('邮箱', user.mail)">
         邮箱
         <ion-note item-right>
         {{user.mail}}

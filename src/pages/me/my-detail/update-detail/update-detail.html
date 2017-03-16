@@ -1,0 +1,50 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{type}}修改</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content [ngSwitch]="type">
+
+  <form *ngSwitchCase="'固话号码'" (ngSubmit)="logForm({
+    telephone: telephone.value
+  }
+  )">
+    <ion-list>
+      <ion-item [class.has-error]="telephone.Error" [class.has-success]="telephone.pass">
+        <ion-label floating>固话号码</ion-label>
+        <ion-input type="text" #telephone [value]="val" (blur)="check($event,telephone)" (focus)="telephone.Error=''" data-v-required="true" data-v-required-message="固话号码不能为空" data-v-phone="true" data-v-phone-message="固话号码格式不正确"></ion-input>
+      </ion-item>
+      <ion-item-divider *ngIf="telephone.Error" class='alert'>{{telephone.Error}}</ion-item-divider>
+    </ion-list>
+    <button ion-button type="submit" [disabled]="telephone.Error">Submit</button>
+  </form>
+  <form *ngSwitchCase="'手机号码'" (ngSubmit)="logForm({
+    mobile: mobile.value
+  }
+  )">
+    <ion-list>
+      <ion-item [class.has-error]="mobile.Error" [class.has-success]="mobile.pass">
+        <ion-label floating>固话号码</ion-label>
+        <ion-input type="number" #mobile [value]="val" (blur)="check($event,mobile)" (focus)="mobile.Error=''" data-v-required="true" data-v-required-message="手机号码不能为空" data-v-mobile="true" data-v-mobile-message="手机号码格式不正确"></ion-input>
+      </ion-item>
+      <ion-item-divider *ngIf="mobile.Error" class='alert'>{{mobile.Error}}</ion-item-divider>
+    </ion-list>
+    <button ion-button type="submit" [disabled]="mobile.Error">Submit</button>
+  </form>
+  <form *ngSwitchDefault (ngSubmit)="logForm({
+      mail: mail.value
+    }
+    )">
+    <ion-list>
+      <ion-item [class.has-error]="mail.Error" [class.has-success]="mail.pass">
+        <ion-label floating>邮箱</ion-label>
+        <ion-input type="email" #mail [value]="val" (blur)="check($event,mail)" (focus)="mail.Error=''" data-v-required="true" data-v-required-message="邮箱不能为空" data-v-email="true" data-v-email-message="邮箱格式不正确"></ion-input>
+      </ion-item>
+      <ion-item-divider *ngIf="mail.Error" class='alert'>{{mail.Error}}</ion-item-divider>
+    </ion-list>
+    <button ion-button type="submit" [disabled]="mail.Error">Submit</button>
+  </form>
+</ion-content>

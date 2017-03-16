@@ -1,0 +1,49 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>登录</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+
+  <form (ngSubmit)="logForm({
+    accountName: name.value,
+    password: password.value
+  },$event
+  )">
+  <ion-list>
+
+  <ion-item [class.has-error]="name.Error" [class.has-success]="name.pass">
+    <ion-label floating>用户名</ion-label>
+    <ion-input autofocus type="text" #name [value]="accountName" [disabled] = "toValiPassword" (blur)="check($event,name)" (focus)="name.Error=''"
+    data-v-required="true"
+    data-v-required-message="账号名不能为空"
+    ></ion-input>
+  </ion-item>
+  <ion-item-divider *ngIf="name.Error" class='alert'>{{name.Error}}</ion-item-divider>
+
+
+  <ion-item [class.has-error]="password.Error" [class.has-success]="password.pass">
+    <ion-label floating>密码</ion-label>
+    <ion-input type="password" #password (blur)="check($event,password)" (focus)="password.Error=''"
+    data-v-required="true"
+    data-v-required-message="密码不能为空"
+    data-v-betweenl="6-20"
+    data-v-betweenl-message="密码长度必须在6-20位"
+    ></ion-input>
+  </ion-item>
+
+  <ion-item-divider *ngIf="password.Error" class='alert'>{{password.Error}}</ion-item-divider>
+
+
+</ion-list>
+<!-- <div class="field required">
+  <label>头像</label>
+  <input type="file" name="avatar" #img>
+</div> -->
+<button ion-button type="submit" [disabled]="name.Error || password.Error" #sub >Submit</button>
+</form>
+</ion-content>

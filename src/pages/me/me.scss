@@ -38,7 +38,7 @@ $headImgSize3: 150px;
       }
     }
     .message{
-      margin-top: 2%;
+      margin-top: 1%;
       &.first{
         margin-top: $headImgSize3*1.1;
       }
@@ -48,7 +48,7 @@ $headImgSize3: 150px;
 @media screen and (max-width:500px) {
 	.head{
     font-size: 130%;
-    height:37%;
+    height:38%;
     .nav-head{
       .pagehead{
         .person{

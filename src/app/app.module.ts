@@ -17,10 +17,13 @@ import { WorkPage } from '../pages/work/work11/work';
 import { SetPage } from '../pages/me/set/set';
 import { NineCodePage } from '../pages/me/set/nine-code/nine-code';
 import { MyDetailPage } from '../pages/me/my-detail/my-detail';
-
+import { UpdateDetailPage } from '../pages/me/my-detail/update-detail/update-detail';
+import { MyQrPage }  from '../pages/me/my-detail/my-qr/my-qr';
 import { EGridComponent } from '../components/e-grid/e-grid';
 import { DataService } from '../services/data.service';
 import { ValidateService } from '../services/validate.service';
+
+import { SignupPage } from '../pages/signup/signup';
 
 @NgModule({
   declarations: [
@@ -37,7 +40,10 @@ import { ValidateService } from '../services/validate.service';
     WorkPage,
     SetPage,
     MyDetailPage,
-    NineCodePage
+    NineCodePage,
+    SignupPage,
+    UpdateDetailPage,
+    MyQrPage
   ],
   imports: [
     IonicModule.forRoot(MyApp,{
@@ -59,7 +65,10 @@ import { ValidateService } from '../services/validate.service';
     WorkPage,
     SetPage,
     MyDetailPage,
-    NineCodePage
+    NineCodePage,
+    SignupPage,
+    UpdateDetailPage,
+    MyQrPage
   ],
   providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler }, DataService, ValidateService]
 })
