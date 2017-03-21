@@ -15,7 +15,7 @@ export class MyQrPage {
   constructor(public navCtrl: NavController, public navParams: NavParams ) {
   }
   user: User;
-  url : string = 'http://10.86.21.46:3700/';
+  url : string = 'http://10.86.21.157:3700/';
   myQr: string;
   ionViewDidLoad() {
     this.user = JSON.parse(localStorage.getItem('user'));

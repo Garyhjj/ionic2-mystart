@@ -1,0 +1,106 @@
+<ion-header>
+
+  <ion-navbar color="keep">
+    <ion-title>创建请假单</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-list>
+    <ion-item>
+      状态：
+      <ion-note item-right>
+        New
+      </ion-note>
+    </ion-item>
+
+    <ion-item>
+      单据编号：
+      <ion-note item-right>
+        HTL021703007172
+      </ion-note>
+    </ion-item>
+  </ion-list>
+  <form [formGroup]="todo" *ngIf="todo" (ngSubmit)="leaveForm(end)">
+    <ion-list>
+      <ion-item [class.has-error]="type.Error" [class.has-success]="type.pass">
+        <ion-label>假别*</ion-label>
+        <ion-select cancelText="取消" okText="確認" formControlName="type" #type>
+          <ion-option *ngFor="let item of holidayType" [value]="item.type">{{item.name}}</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>开始时间*</ion-label>
+        <ion-datetime displayFormat="YYYY/MM/DD HH:mm"  #start name="start" formControlName="startTime"
+        cancelText="取消" doneText="确认"
+        yearValues="2017,2018"
+        ></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label>结束时间*</ion-label>
+        <ion-datetime displayFormat="YYYY/MM/DD HH:mm"  #end name="end" formControlName="endTime"
+        cancelText="取消" doneText="确认"
+        yearValues="2017,2018"
+        ></ion-datetime>
+      </ion-item>
+      <ion-item-divider *ngIf="timeError " class='alert'>{{timeError}}</ion-item-divider>
+      <ion-item class="searchOut" [class.has-error]="name.Error" [class.has-success]="name.pass">
+        <ion-label>代理*</ion-label>
+        <ion-input type="text" #name (keyup)="search(name)" (blur)="check($event,name)" formControlName="boss" (focus)="name.Error=''" data-v-required="true" data-v-required-message="请选择代理人"></ion-input>
+      </ion-item>
+      <ion-item-divider *ngIf="name.Error" class='alert'>{{name.Error}}</ion-item-divider>
+      <ion-grid>
+        <ion-row>
+          <ion-col width-50>
+            <ion-item>
+              日数：
+              <ion-note item-right>
+                {{dayLeave}}
+              </ion-note>
+            </ion-item>
+          </ion-col>
+          <ion-col width-50>
+            <ion-item>
+              时数：
+              <ion-note item-right>
+                {{hourLeave}}
+              </ion-note>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-item [class.has-error]="reason.Error" [class.has-success]="reason.pass">
+        <ion-label>原因*</ion-label>
+        <ion-textarea rows="3" cols="20" formControlName="reason"
+          (blur)="check($event,reason)" #reason
+          data-v-required="true"
+          data-v-required-message="原因不能为空"
+          data-v-minlength = "2"
+          data-v-minlength-message="原因长度不能少于2位"
+        ></ion-textarea>
+      </ion-item>
+      <ion-item-divider *ngIf="reason.Error" class='alert'>{{reason.Error}}</ion-item-divider>
+    </ion-list>
+    <ion-grid>
+      <ion-row>
+        <ion-col width-50>
+          <ion-buttons left>
+            <button ion-button type="submit" [disabled]="!todo.valid || reason.Error || name.Error || !isSelectBoss || timeError">提交</button>
+          </ion-buttons>
+        </ion-col>
+        <ion-col width-50>
+          <ion-buttons right>
+            <button ion-button [disabled]="!todo.valid || reason.Error || name.Error || !isSelectBoss || timeError">保存</button>
+          </ion-buttons>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+  <ul class="list-group" [class.search]="colleague">
+    <li *ngFor="let person of colleague | async" (click) ="getBoss(person.name)"
+        class="search-result list-group-item">{{person.name}}</li>
+  </ul>
+</ion-content>

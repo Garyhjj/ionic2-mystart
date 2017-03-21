@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { BarcodeScanner } from 'ionic-native';
 import { SetPage } from './set/set';
 import { MyDetailPage } from './my-detail/my-detail';
+import { User } from '../../interfaces/user';
+import { Config } from '../../config/default';
 /*
   Generated class for the Me page.
 
@@ -9,17 +12,6 @@ import { MyDetailPage } from './my-detail/my-detail';
   Ionic pages and navigation.
 */
 
-class User{
-  _id : string;
-  name:string;
-  photo:string;
-  secDim:string;
-  mobile:number;
-  telephone:string;
-  mail:string;
-  position:string;
-  department:string;
-}
 
 @Component({
   selector: 'page-me',
@@ -27,9 +19,9 @@ class User{
 })
 export class MePage {
 
-  user:User;
-  url : string = 'http://10.86.21.46:3700/';
-  serverPhoto:string;
+  user: User;
+  url: string = new Config().baseUrl;
+  serverPhoto: string;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
   ionViewDidLoad() {
@@ -37,21 +29,32 @@ export class MePage {
     this.serverPhoto = this.url + this.user.photo;
   }
   ionViewWillEnter() {
-    if(localStorage.getItem('newPicture')){
+    if (localStorage.getItem('newPicture')) {
       this.serverPhoto = localStorage.getItem('newPicture');
       localStorage.removeItem('newPicture');
     }
   }
-  toSet():void{
+  toSet(): void {
     this.navCtrl.push(SetPage, {
 
     });
   }
 
-  toMyDetail():void{
-    this.navCtrl.push(MyDetailPage,{
-      photo:this.serverPhoto
+  toMyDetail(): void {
+    this.navCtrl.push(MyDetailPage, {
+      photo: this.serverPhoto
     });
+  }
+
+  // 获取二维码信息
+  getQrMessage(): void {
+    BarcodeScanner.scan().then((barcodeData) => {
+      console.log(barcodeData)
+    }, (err) => {
+      console.log(err)
+    });
+
+
   }
 
 }

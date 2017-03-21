@@ -1,0 +1,42 @@
+<ion-header>
+
+  <ion-navbar color="keep">
+    <ion-title>请假单维护</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="newLeave()">新建单据</button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-list>
+    <ion-item-group>
+      <ion-item-divider color="light">可休假天数</ion-item-divider>
+    <ion-item>
+      <ion-icon name="star" item-left color="keep"></ion-icon>
+      年休假天数
+      <ion-badge item-right>{{availableHoliday.year}}</ion-badge>
+    </ion-item>
+    <ion-item>
+      <ion-icon name="star" item-left color="keep"></ion-icon>
+      补休时数
+      <ion-badge item-right>{{availableHoliday.hour}}</ion-badge>
+    </ion-item>
+    <ion-item>
+      <ion-icon name="star" item-left color="keep"></ion-icon>
+      补假时数
+      <ion-badge item-right>{{availableHoliday.day}}</ion-badge>
+    </ion-item>
+  </ion-item-group>
+  <ion-item-group>
+    <ion-item-divider color="light">已休假天数</ion-item-divider>
+  <ion-item *ngFor="let item of uesdHoliday" >
+    <ion-icon name="stats" item-left color="mac"></ion-icon>
+    {{item.name}}
+    <ion-badge item-right color="keep">{{item.day}}</ion-badge>
+  </ion-item>
+</ion-item-group>
+  </ion-list>
+</ion-content>

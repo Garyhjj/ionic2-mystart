@@ -3,6 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { TabsPage } from '../../../tabs/tabs';
 import { SignupPage } from '../../../signup/signup';
 import { User } from '../../../../interfaces/user';
+import { Config } from '../../../../config/default'
 
 /*
   Generated class for the BookLibrary page.
@@ -16,7 +17,7 @@ import { User } from '../../../../interfaces/user';
 export class NineCodePage {
 
   needNineCode:boolean;
-  url : string = 'http://10.86.21.46:3700/';
+  url : string = new Config().baseUrl;
   user: User;
   R: number = 26;
   canvasWidth: number = 400;
@@ -37,7 +38,6 @@ export class NineCodePage {
     this.message = this.isVal? '请验证手势密码': '请输入原来的密码';
     this.isReSet = localStorage.getItem('myNineCode')? false : true;
     this.message = this.isReSet? '请设置手势密码': this.message;
-
   }
 
   // 忘记手势密码

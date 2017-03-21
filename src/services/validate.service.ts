@@ -16,7 +16,7 @@ export class ValidateService {
       return this.value.length <= Number(this.dataset['vMaxlength']);
     },//最大长度
     Minlength : function(){
-      return this.value.length >= Number(this.datasey['vMinlength']);
+      return this.value.length >= Number(this.dataset['vMinlength']);
     },//最小长度
     Betweenl : function(){
       var valueL = this.value.length;

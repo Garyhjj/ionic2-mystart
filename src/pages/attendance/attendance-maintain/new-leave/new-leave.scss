@@ -1,0 +1,52 @@
+page-new-leave {
+  .search {
+    position: absolute;
+    top: 353px;
+    left: 20%;
+    z-index: 1000;
+    width: 100%;
+  }
+
+  ion-label{
+    color:#000 !important;
+  }
+  .search-result {
+    cursor: pointer;
+    width: 60%;
+  }
+
+  .list-group {
+    margin-top: 0;
+    padding-left: 0;
+    margin-bottom: 20px;
+  }
+
+  .list-group-item {
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+    margin-bottom: -1px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+  }
+}
+
+ion-alert,
+ion-content,
+ion-header,
+ion-list,
+ion-nav,
+ion-picker-cmp {
+  font-family: Arial,"Microsoft Yahei";
+}
+
+.alert ion-label{
+  font-size:50%;
+  color:red!important;
+}
+.has-error ion-label{
+  color: #a94442!important;
+}
+.has-success ion-label{
+  color: #387ef5!important;
+}

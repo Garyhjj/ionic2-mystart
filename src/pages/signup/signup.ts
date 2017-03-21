@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
 import { DataService } from '../../services/data.service';
 import { NineCodePage } from '../me/set/nine-code/nine-code';
 import { ValidateService } from '../../services/validate.service';
@@ -15,7 +16,8 @@ export class SignupPage{
     public navParams: NavParams,
     private dataService: DataService,
     private validateService: ValidateService,
-    private alertCtrl: AlertController
+    private alertCtrl: AlertController,
+    private storage :Storage
    ) {}
 
   toValiPassword :boolean
@@ -32,9 +34,10 @@ export class SignupPage{
   }
 
   logForm(accountM) {
-    Keyboard.close();
-    this.dataService.checkLogin(accountM).then((res:{user:any,error:string}) => {
+    // Keyboard.close();
+    this.dataService.checkLogin(accountM).then((res:{user:any,error:string,token:string}) => {
       if(res.user){
+        this.storage.set('id_token',res.token);
         localStorage.setItem('user',JSON.stringify(res.user));
         // 清除验证密码的设定
         if(this.toValiPassword){

@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { ApplicationItem } from '../interfaces/applicationitem';
-
+import { AuthHttp } from 'angular2-jwt';
+import { Config } from '../config/default';
 export class Work {
   id: number;
   name: string;
@@ -15,9 +16,9 @@ export class Work {
 
 @Injectable()
 export class DataService {
-  constructor(private http: Http) { }
+  constructor(private http: Http, private authHttp: AuthHttp) { }
 
-  myurl: string = 'http://10.86.21.46:3700/user';
+  myurl: string = new Config().baseUrl+ 'user';
   checkLogin(accountM): Promise<Object> {
     return this.http.post(this.myurl,accountM).toPromise().then((res) => {
       return res.json();
@@ -25,7 +26,7 @@ export class DataService {
   }
 
   updateDetail(accountM): Promise<Object> {
-    return this.http.post(this.myurl+'/update',accountM).toPromise().then((res) => {
+    return this.authHttp.post(this.myurl+'/update',accountM).toPromise().then((res) => {
       return res.json();
     })
   }

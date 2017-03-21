@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { Platform, ToastController, Nav, IonicApp } from 'ionic-angular';
 import { StatusBar, Splashscreen, ScreenOrientation } from 'ionic-native';
+import { Storage } from '@ionic/storage';
 import { NineCodePage } from '../pages/me/set/nine-code/nine-code';
 import { SignupPage } from '../pages/signup/signup';
 
@@ -11,7 +12,7 @@ export class MyApp {
   rootPage: any = NineCodePage;
   backButtonPressed: boolean = false;  //用于判断返回键是否触发
   @ViewChild('myNav') nav: Nav;
-  constructor(public ionicApp: IonicApp, public platform: Platform, public toastCtrl: ToastController) {
+  constructor(public ionicApp: IonicApp, public platform: Platform, public toastCtrl: ToastController, private storage: Storage) {
     if (localStorage.getItem('needPassNineCode') == 'false' || !localStorage.getItem('user')) {
       this.rootPage = SignupPage;
     }

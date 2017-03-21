@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { ActionSheetController } from 'ionic-angular';
-import { Camera, Transfer } from 'ionic-native';
+import { Camera, Transfer, BarcodeScanner } from 'ionic-native';
 import { UpdateDetailPage } from './update-detail/update-detail';
 import { MyQrPage } from './my-qr/my-qr';
 import { User } from '../../../interfaces/user';
+import { Config } from '../../../config/default';
 /*
   Generated class for the BookLibrary page.
 
@@ -19,7 +20,7 @@ export class MyDetailPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, private actionSheetCtrl: ActionSheetController) {
   }
   user: User;
-  url : string = 'http://10.86.21.46:3700/';
+  url : string = new Config().baseUrl;
   base64Image: string;
   uploadOptions: any;
   serverPhoto:string;
@@ -64,16 +65,14 @@ export class MyDetailPage {
     };
     Camera.getPicture(options).then((imageData) => {
       // imageData is a base64 encoded string
-      if (imageData) {
-        this.base64Image = "data:image/jpeg;base64," + imageData;
-        this.serverPhoto = this.base64Image;
-        localStorage.setItem('newPicture',this.base64Image);
-      }
+      this.base64Image = "data:image/jpeg;base64," + imageData;
       this.fileTransfer.upload(this.base64Image, this.url + "user/update/picture", this.uploadOptions)
         .then((data: any) => {
-          console.log(data.response)
+          console.log(data.response);
+          this.serverPhoto = this.base64Image;
+          localStorage.setItem('newPicture',this.base64Image);
         }, (err) => {
-          console.log(err)
+          console.log('服务器没响应')
         })
     }, (err) => {
       console.log(err);
@@ -97,7 +96,7 @@ export class MyDetailPage {
           text: '取消',
           role: '取消',
           handler: () => {
-            console.log('Cancel clicked');
+
           }
         }
       ]
@@ -113,6 +112,12 @@ export class MyDetailPage {
   }
 
   showQr():void {
-    this.navCtrl.push(MyQrPage);
+    // 从前端获取
+    BarcodeScanner.encode('TEXT_TYPE',this.user.accountName).then((res) => {
+    }, (err) => {
+      console.log(err)
+    })
+    // // 从后台获取
+    // this.navCtrl.push(MyQrPage);
   }
 }

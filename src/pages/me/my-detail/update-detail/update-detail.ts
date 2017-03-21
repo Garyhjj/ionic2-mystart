@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
+import { Storage } from '@ionic/storage';
 import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { DataService } from '../../../../services/data.service';
 import { ValidateService } from '../../../../services/validate.service';
-
+import { User } from "../../../../interfaces/user";
 @Component({
   templateUrl: 'update-detail.html'
 })
@@ -10,12 +11,14 @@ export class UpdateDetailPage {
 
   type: string;
   val: string;
+  user: User;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     private dataService: DataService,
     private validateService: ValidateService,
-    private alertCtrl: AlertController
+    private alertCtrl: AlertController,
+    private storage: Storage
   ) { }
 
   errorMessage: string;
@@ -25,14 +28,15 @@ export class UpdateDetailPage {
   ionViewWillEnter() {
     this.type = this.navParams.data.type;
     this.val = this.navParams.data.value;
+    this.user = JSON.parse(localStorage.getItem('user'));
   }
   ionViewWillLeave() {
   }
 
   logForm(accountM) {
-    this.dataService.updateDetail({accountName:'yuanwen.yang',data:accountM}).then((res: { isPass: boolean, error: string }) => {
+    this.dataService.updateDetail({ data: accountM }).then((res: { isPass: boolean, error: string }) => {
       if (res.isPass) {
-        for(let prop in accountM) {
+        for (let prop in accountM) {
           let user = JSON.parse(localStorage.getItem('user'));
           user[prop] = accountM[prop];
           localStorage.setItem('user', JSON.stringify(user));
@@ -43,9 +47,47 @@ export class UpdateDetailPage {
       } else {
         this.errorMessage = res.error;
         let alert = this.alertCtrl.create({
-          title: '更改失败!',
-          subTitle: this.errorMessage,
-          buttons: ['确认']
+          title: this.errorMessage,
+          inputs: [
+            {
+              name: 'password',
+              placeholder: 'Password',
+              type: 'password'
+            }
+          ],
+          buttons: [
+            {
+              text: '取消',
+              role: 'cancel',
+              handler: data => {
+
+              }
+            },
+            {
+              text: '登录',
+              handler: data => {
+                console.log(data)
+                this.dataService.checkLogin({ accountName: this.user.accountName, password: data.password }).then((res: { user: User, error: string, token: string }) => {
+                  if (res.user) {
+                    this.storage.set('id_token', res.token);
+                    let alert = this.alertCtrl.create({
+                      title: '成功',
+                      subTitle: '已重新登录',
+                      buttons: ['确认']
+                    });
+                    alert.present();
+                  }else {
+                    let alert = this.alertCtrl.create({
+                      title: '失败',
+                      subTitle: '密码错误',
+                      buttons: ['确认']
+                    });
+                    alert.present();
+                  }
+                })
+              }
+            }
+          ]
         });
         alert.present();
       }
