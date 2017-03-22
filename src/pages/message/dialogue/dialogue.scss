@@ -1,0 +1,138 @@
+page-dialogue {
+    $fontcolor: #7b7b7b;
+    $activecolor: #13b113;
+    .msgarea {
+        padding: 10px 0px;
+        .clearfix:after {
+            content: ".";
+            display: block;
+            height: 0;
+            clear: both;
+            visibility: hidden
+        }
+        .clearfix {
+            height: 1%;
+        }
+        .msg {
+            border: 1px solid #d8d8d8;
+            font-size: 16px;
+            display: inline-block;
+            padding: 7px 10px;
+            max-width: 225px;
+            border-radius: 7px;
+        }
+        .icon {
+            width: 35px;
+            height: 35px;
+        }
+        .me {
+            .msg {
+                background-color: #9fe757;
+                float: right;
+                margin-right: 10px;
+                .arrow_r_int {
+                    width: 0px;
+                    height: 0px;
+                    border-width: 8px;
+                    border-style: solid;
+                    border-color: transparent transparent transparent #9fe757;
+                    position: absolute;
+                    right: 51px;
+                }
+            }
+            .icon {
+                float: right;
+                margin-right: 5px;
+            }
+        }
+        .other {
+            .msg {
+                background-color: #fff;
+                float: left;
+                margin-left: 10px;
+                .arrow_l_int {
+                    width: 0px;
+                    height: 0px;
+                    border-width: 8px;
+                    border-style: solid;
+                    border-color: transparent #c8c7cc transparent transparent;
+                    position: absolute;
+                    left: 50px;
+                }
+                .arrow_l_out {
+                    width: 0px;
+                    height: 0px;
+                    border-width: 8px;
+                    border-style: solid;
+                    border-color: transparent #fff transparent transparent;
+                    position: absolute;
+                    left: 51px;
+                }
+            }
+            .icon {
+                float: left;
+                margin-left: 5px;
+            }
+        }
+    }
+    .input {
+        color: $fontcolor;
+        position: fixed;
+        bottom: 0;
+        left: 0px;
+        height: 40px;
+        width: 100%;
+        border-top: 1px solid #d8d8d8;
+        background-color: #ededed;
+        font-size: 11px;
+        .input_layout {
+            position: relative;
+            height: 40px;
+            line-height: 40px;
+            .input_icon {
+                position: absolute;
+                width: 40px;
+                height: 40px;
+                &.voice {
+                    left: 0px;
+                }
+                &.face {
+                    right: 45px;
+                }
+                &.plus {
+                    right: 0px;
+                }
+            }
+            .input_text {
+                border-bottom: 1px solid #d8d8d8;
+                margin-left: 50px;
+                margin-right: 120px;
+                vertical-align: middle;
+                height: 30px;
+                width: 230px;
+                font-size: 16px;
+                color: #000;
+            }
+            .send {
+                background-color: #14b012;
+                display: inline-block;
+                box-sizing: border-box;
+                position: absolute;
+                border: 1px solid #378c37;
+                border-radius: 2px;
+                right: 0px;
+                bottom: 2px;
+                width: 45px;
+                height: 37px;
+                line-height: 36px;
+                color: white;
+                text-align: center;
+                font-size: 15px;
+                margin-top: 4px;
+                &.hidden {
+                    display: none;
+                }
+            }
+        }
+    }
+}

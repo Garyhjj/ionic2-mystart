@@ -4,7 +4,7 @@ import { MessagePage } from '../message/message';
 import { ApplicationPage } from '../application/application';
 import { NamesPage } from '../names/names';
 import { MePage } from '../me/me';
-
+import { ChatService }  from '../../services/ChatService';
 @Component({
   templateUrl: 'tabs.html'
 })
@@ -17,7 +17,11 @@ export class TabsPage {
   tab3Root: any = NamesPage;
   tab4Root: any = MePage;
 
-  constructor() {
+  constructor(private chatService: ChatService) {
+
   }
 
+  ionViewDidLoad() {
+    this.chatService.login();
+  }
 }

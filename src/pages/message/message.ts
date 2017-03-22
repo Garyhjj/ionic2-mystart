@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-
+import { DialoguePage } from './dialogue/dialogue';
+import { User } from '../../interfaces/user';
 /*
   Generated class for the Message page.
 
@@ -13,35 +14,42 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class MessagePage {
 
-  fdg:string = "";
+  messageListItem1= [{
+      "avatarSrc": "http://10.86.21.157:3700/user/photo/hansan.wu.jpg",
+      "userNickName": "吴汉三",
+      "lastmsg": "小三哥，我穷",
+      "timedesc": new Date(1480338091398).toTimeString(),
+      "type": "dialogue",
+      "unread": false,
+      "unreadCount":2,
+      "id":"58c79aa4e82b541968c9a29f"
+  }];
+
+  messageListItem2= [{
+      "avatarSrc": "http://10.86.21.157:3700/user/photo/yuanwen.yang.jpg",
+      "userNickName": "杨元文",
+      "lastmsg": "小文哥，我穷",
+      "timedesc": new Date(1480338091390).toTimeString(),
+      "type": "dialogue",
+      "unread": false,
+      "unreadCount":5,
+      "id":"58c756fbd87f6f0b082ff472"
+  }];
   constructor(public navCtrl: NavController, public navParams: NavParams) {
 
   }
 
+  user:User;
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad MessagePage');
+    this.user = JSON.parse(localStorage.getItem('user'));
   }
-  mes:string[]=[];
-  send2(mes){
-    this.mes.push(`<h4 class="pull-right">${mes.value}</h4>`);
-    this.fdg = this.mes.join('');
-    setTimeout(() =>{
-      let new1 :any = document.querySelectorAll('.pull-right');
-      console.log(new1);
-
-
-
-    },0);
-
-
-
-  }
-  send3(mes){
-    this.fdg += `<h4 class="pull-left">${mes.value}</h4>`;
+  goToMessageDetailPage(item) {
+    if (item.type === 'dialogue') {
+      this.navCtrl.push(DialoguePage, item);
+    } else {
+      // this.navCtrl.push('notice');
+    }
   }
 
-  showMes(event:any){
-    console.log(123)
-  }
 }

@@ -1,21 +1,39 @@
-<!--
-  Generated template for the Message page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
   <ion-navbar>
-    <ion-title>消息</ion-title>
+    <ion-title class="page-title">
+      <div>消息</div>
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button large class="add">
+           <ion-icon name='add'></ion-icon>
+        </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
-<ion-content padding class="mymess">
-  <div class="" [innerHTML]="fdg" >
-  </div>
-  <div class="chatarea">
-    <input type="text" placeholder="说点什么吧..." #mes>
-    <button  ion-button (click)="send2(mes)">发送</button>
-    <button  ion-button (click)="send3(mes)">发送</button>
-  </div>
+<ion-content class="list-avatar-page" *ngIf="user">
+  <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+  <ion-list *ngIf="user._id == '58c756fbd87f6f0b082ff472'">
+    <ion-item *ngFor="let item of messageListItem1" (click)="goToMessageDetailPage(item)">
+      <div item-left class="img-header">
+        <img class="img" src={{item.avatarSrc}}>
+        <div class="badge" *ngIf="item.unreadCount > 0">{{item.unreadCount}}</div>
+      </div>
+      <h2 class="name">{{item.userNickName}}</h2>
+      <p class="msg">{{item.lastmsg}}</p>
+      <ion-note item-right>{{item.timedesc}}</ion-note>
+    </ion-item>
+  </ion-list>
 
+  <ion-list *ngIf="user._id == '58c79aa4e82b541968c9a29f'">
+    <ion-item *ngFor="let item of messageListItem2" (click)="goToMessageDetailPage(item)">
+      <div item-left class="img-header">
+        <img class="img" src={{item.avatarSrc}}>
+        <div class="badge" *ngIf="item.unreadCount > 0">{{item.unreadCount}}</div>
+      </div>
+      <h2 class="name">{{item.userNickName}}</h2>
+      <p class="msg">{{item.lastmsg}}</p>
+      <ion-note item-right>{{item.timedesc}}</ion-note>
+    </ion-item>
+  </ion-list>
+  <!--<button (click)="sendMsg()">send</button>-->
 </ion-content>

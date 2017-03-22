@@ -29,11 +29,12 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       StatusBar.styleDefault();
       Splashscreen.hide();
-      // this.registerBackButtonAction();//注册返回按键事件
+      this.registerBackButtonAction();//注册返回按键事件
       // set to either landscape 限制为竖屏显示
       ScreenOrientation.lockOrientation('portrait').catch((error) => {
         console.log(error);
       });
+
     });
   }
 
@@ -55,7 +56,7 @@ export class MyApp {
       } else {
         return this.showExit()
       }
-    }, 1);
+    }, 101);
   }
 
   //双击退出提示框

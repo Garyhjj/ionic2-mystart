@@ -1,10 +1,15 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+
+import { SocketIoModule, SocketIoConfig } from 'ng2-socket-io'
+import { ChatService } from '../services/ChatService';
+
 import { Storage } from '@ionic/storage';
 import 'rxjs/add/operator/toPromise';
 import { FormsModule }   from '@angular/forms';
 import { MyApp } from './app.component';
 import { MessagePage } from '../pages/message/message';
+import { DialoguePage } from '../pages/message/dialogue/dialogue';
 import { ApplicationPage } from '../pages/application/application';
 import { NamesPage } from '../pages/names/names';
 import { MePage } from '../pages/me/me';
@@ -35,6 +40,7 @@ import { AttendanceMaintainPage } from '../pages/attendance/attendance-maintain/
 import { NewLeavePage } from "../pages/attendance/attendance-maintain/new-leave/new-leave";
 
 let storage = new Storage();
+const config: SocketIoConfig = { url: 'http://10.86.21.157:3701', options: {} };
 
 export function getAuthHttp(http) {
   return new AuthHttp(new AuthConfig({
@@ -66,13 +72,14 @@ export function getAuthHttp(http) {
     MyQrPage,
     AttendancePage,
     AttendanceMaintainPage,
-    NewLeavePage
+    NewLeavePage,
+    DialoguePage
   ],
   imports: [
     IonicModule.forRoot(MyApp, {
       tabsHideOnSubPages: true,
       backButtonText: '',
-    }), FormsModule
+    }), FormsModule,SocketIoModule.forRoot(config)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -94,9 +101,10 @@ export function getAuthHttp(http) {
     MyQrPage,
     AttendancePage,
     AttendanceMaintainPage,
-    NewLeavePage
+    NewLeavePage,
+    DialoguePage
   ],
-  providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler }, DataService, Storage, ValidateService,
+  providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler }, DataService, Storage, ValidateService, ChatService,
     {
         provide: AuthHttp,
         useFactory: getAuthHttp,
