@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { DialoguePage } from './dialogue/dialogue';
 import { User } from '../../interfaces/user';
+import { ChatService } from '../../services/ChatService';
 /*
   Generated class for the Message page.
 
@@ -13,40 +14,34 @@ import { User } from '../../interfaces/user';
   templateUrl: 'message.html'
 })
 export class MessagePage {
-
-  messageListItem1= [{
-      "avatarSrc": "http://10.86.21.157:3700/user/photo/hansan.wu.jpg",
-      "userNickName": "吴汉三",
-      "lastmsg": "小三哥，我穷",
-      "timedesc": new Date(1480338091398).toTimeString(),
-      "type": "dialogue",
-      "unread": false,
-      "unreadCount":2,
-      "id":"58c79aa4e82b541968c9a29f"
-  }];
-
-  messageListItem2= [{
-      "avatarSrc": "http://10.86.21.157:3700/user/photo/yuanwen.yang.jpg",
-      "userNickName": "杨元文",
-      "lastmsg": "小文哥，我穷",
-      "timedesc": new Date(1480338091390).toTimeString(),
-      "type": "dialogue",
-      "unread": false,
-      "unreadCount":5,
-      "id":"58c756fbd87f6f0b082ff472"
-  }];
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  messageListItem;
+  constructor(public navCtrl: NavController, public navParams: NavParams, private chatService: ChatService) {
 
   }
 
   user:User;
 
+
   ionViewDidLoad() {
     this.user = JSON.parse(localStorage.getItem('user'));
+    // 观察是否有新消息
+    this.chatService.updateTerms.subscribe((item) => {
+      this.chatService.getMes().then((mes) => {
+        this.messageListItem = mes;
+      })
+    })
   }
-  goToMessageDetailPage(item) {
+  ionViewWillEnter() {
+    this.chatService.getMes().then((mes) => {
+      this.messageListItem = mes;
+    })
+  }
+  goToMessageDetailPage(item,index) {
     if (item.type === 'dialogue') {
-      this.navCtrl.push(DialoguePage, item);
+      this.navCtrl.push(DialoguePage, {
+        mes:item,
+        _index:index
+      });
     } else {
       // this.navCtrl.push('notice');
     }

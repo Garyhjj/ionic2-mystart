@@ -12,27 +12,15 @@
 </ion-header>
 <ion-content class="list-avatar-page" *ngIf="user">
   <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
-  <ion-list *ngIf="user._id == '58c756fbd87f6f0b082ff472'">
-    <ion-item *ngFor="let item of messageListItem1" (click)="goToMessageDetailPage(item)">
+  <ion-list>
+    <ion-item *ngFor="let item of messageListItem;let i = index;trackBy:trackBymessageListItem" (click)="goToMessageDetailPage(item,i)">
       <div item-left class="img-header">
-        <img class="img" src={{item.avatarSrc}}>
+        <img class="img" src={{item.toPhoto}}>
         <div class="badge" *ngIf="item.unreadCount > 0">{{item.unreadCount}}</div>
       </div>
-      <h2 class="name">{{item.userNickName}}</h2>
-      <p class="msg">{{item.lastmsg}}</p>
-      <ion-note item-right>{{item.timedesc}}</ion-note>
-    </ion-item>
-  </ion-list>
-
-  <ion-list *ngIf="user._id == '58c79aa4e82b541968c9a29f'">
-    <ion-item *ngFor="let item of messageListItem2" (click)="goToMessageDetailPage(item)">
-      <div item-left class="img-header">
-        <img class="img" src={{item.avatarSrc}}>
-        <div class="badge" *ngIf="item.unreadCount > 0">{{item.unreadCount}}</div>
-      </div>
-      <h2 class="name">{{item.userNickName}}</h2>
-      <p class="msg">{{item.lastmsg}}</p>
-      <ion-note item-right>{{item.timedesc}}</ion-note>
+      <h2 class="name">{{item.toName}}</h2>
+      <p class="msg">{{item.mes[item.mes.length-1].content}}</p>
+      <ion-note item-right>{{item.mes[item.mes.length-1].time | chatTime}}</ion-note>
     </ion-item>
   </ion-list>
   <!--<button (click)="sendMsg()">send</button>-->

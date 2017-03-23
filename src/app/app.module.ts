@@ -21,6 +21,8 @@ import '../assets/js/rxjs-extension';
 import { WorksPage } from '../pages/work/works/works';
 import { WorkPage } from '../pages/work/work11/work';
 
+import { ChatTimePipe } from '../pipe/chat-time.pipe';
+
 import { SetPage } from '../pages/me/set/set';
 import { NineCodePage } from '../pages/me/set/nine-code/nine-code';
 import { MyDetailPage } from '../pages/me/my-detail/my-detail';
@@ -73,7 +75,8 @@ export function getAuthHttp(http) {
     AttendancePage,
     AttendanceMaintainPage,
     NewLeavePage,
-    DialoguePage
+    DialoguePage,
+    ChatTimePipe
   ],
   imports: [
     IonicModule.forRoot(MyApp, {

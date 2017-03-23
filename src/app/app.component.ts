@@ -24,6 +24,7 @@ export class MyApp {
     if (!localStorage.getItem('needPassNineCode')) {
       localStorage.setItem('needPassNineCode', 'true');
     }
+    this.storage.set('chatting',false);
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
