@@ -36,7 +36,20 @@ export class ChatTimePipe implements PipeTransform {
     } else if(show == '前天') {
       return '前天'
     } else {
-      return hour + ':' +minute
+      let minuteFormat:any = minute < 10? '0' + minute: minute;
+      let hourFormat = '';
+      if(hour >= 0 && hour < 6) {
+        hourFormat = '凌晨 '+ hour;
+      } else if(hour >= 6 && hour < 12) {
+        hourFormat = '早上 '+ hour;
+      } else if(hour >= 12 && hour < 13) {
+        hourFormat = '中午 '+ hour;
+      } else if(hour >= 13 && hour < 18) {
+        hourFormat = '下午 '+ hour;
+      } else if(hour >= 18 && hour < 24) {
+        hourFormat = '晚上 '+ hour;
+      }
+      return hourFormat + ':' +minuteFormat
     }
   }
 }

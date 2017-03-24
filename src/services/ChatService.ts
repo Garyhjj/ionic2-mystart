@@ -19,17 +19,19 @@ export class ChatService {
   getUser():User{
     return JSON.parse(localStorage.getItem('user'));
   }
-  // login(){
-  //   let user:User = this.getUser();
-  //   this.socket.emit("login",{
-  //     id:user._id,
-  //     name:user.name
-  //   })
-  // }
+  login(){
+    let user:User = this.getUser();
+    this.socket.emit("login",{
+      id:user._id,
+      name:user.name
+    })
+  }
   // 信息储存到本地
   saveMes(mes){
     let user:User = this.getUser();
-    this.storage.set(user._id+'chat',mes);
+    this.storage.set(user._id+'chat',mes).then((item) => {
+      this.updateTerms.next(true);
+    });
   }
   // 获得本地消息
   getMes(){
@@ -76,7 +78,6 @@ export class ChatService {
       this.changeUnreadCount(updateMes).then((mes) => {
         let newLocalMes :Chat[] = mes.concat(otherMes);
         this.saveMes(newLocalMes);
-        this.updateTerms.next(true);
       })
     })
   }
@@ -101,5 +102,8 @@ export class ChatService {
   getStatus(){
     return this.socket
       .fromEvent<any>("status");
+  }
+  hasGottenMes(mes){
+    this.socket.emit('received',mes);
   }
 }
