@@ -42,7 +42,7 @@ import { AttendanceMaintainPage } from '../pages/attendance/attendance-maintain/
 import { NewLeavePage } from "../pages/attendance/attendance-maintain/new-leave/new-leave";
 
 let storage = new Storage();
-const config: SocketIoConfig = { url: 'http://10.86.21.157:3701', options: {} };
+const config: SocketIoConfig = { url: 'http://10.86.21.170:3701', options: {} };
 
 export function getAuthHttp(http) {
   return new AuthHttp(new AuthConfig({

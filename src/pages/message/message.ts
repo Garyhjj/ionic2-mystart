@@ -29,12 +29,14 @@ export class MessagePage {
       this.chatService.getMes().then((mes) => {
         this.messageListItem = mes;
       })
+      // this.messageListItem = this.chatService.tempMes();
     })
   }
   ionViewWillEnter() {
     this.chatService.getMes().then((mes) => {
       this.messageListItem = mes;
     })
+    // this.messageListItem = this.chatService.getTempMes();
   }
   goToMessageDetailPage(item,index) {
     if (item.type === 'dialogue') {

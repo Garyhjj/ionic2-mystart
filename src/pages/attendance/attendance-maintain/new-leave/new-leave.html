@@ -2,8 +2,10 @@
 
   <ion-navbar color="keep">
     <ion-title>创建请假单</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="myholidayDetail()">查询</button>
+    </ion-buttons>
   </ion-navbar>
-
 </ion-header>
 
 
@@ -47,11 +49,11 @@
         ></ion-datetime>
       </ion-item>
       <ion-item-divider *ngIf="timeError " class='alert'>{{timeError}}</ion-item-divider>
-      <ion-item class="searchOut" [class.has-error]="name.Error" [class.has-success]="name.pass">
+      <ion-item class="searchOut" [class.has-error]="myValidators.boss.error" [class.has-success]="myValidators.boss.pass">
         <ion-label>代理*</ion-label>
-        <ion-input type="text" #name (keyup)="search(name)" (blur)="check($event,name)" formControlName="boss" (focus)="name.Error=''" data-v-required="true" data-v-required-message="请选择代理人"></ion-input>
+        <ion-input type="text" #name (keyup)="search(name)" (blur)="check(name.value,'boss')" formControlName="boss" (focus)="name.Error=''" data-v-required="true" data-v-required-message="请选择代理人"></ion-input>
       </ion-item>
-      <ion-item-divider *ngIf="name.Error" class='alert'>{{name.Error}}</ion-item-divider>
+      <ion-item-divider *ngIf="myValidators.boss.error" class='alert'>{{myValidators.boss.error}}</ion-item-divider>
       <ion-grid>
         <ion-row>
           <ion-col width-50>
@@ -72,28 +74,28 @@
           </ion-col>
         </ion-row>
       </ion-grid>
-      <ion-item [class.has-error]="reason.Error" [class.has-success]="reason.pass">
+      <ion-item [class.has-error]="myValidators.reason.error" [class.has-success]="myValidators.reason.pass">
         <ion-label>原因*</ion-label>
-        <ion-textarea rows="3" cols="20" formControlName="reason"
-          (blur)="check($event,reason)" #reason
+        <ion-textarea rows="3" cols="20" formControlName="reason" class="reasonTest"
+          (blur)="check(reason.value,'reason')" #reason
           data-v-required="true"
           data-v-required-message="原因不能为空"
           data-v-minlength = "2"
           data-v-minlength-message="原因长度不能少于2位"
         ></ion-textarea>
       </ion-item>
-      <ion-item-divider *ngIf="reason.Error" class='alert'>{{reason.Error}}</ion-item-divider>
+      <ion-item-divider *ngIf="myValidators.reason.error" class='alert'>{{myValidators.reason.error}}</ion-item-divider>
     </ion-list>
     <ion-grid>
       <ion-row>
         <ion-col width-50>
           <ion-buttons left>
-            <button ion-button type="submit" [disabled]="!todo.valid || reason.Error || name.Error || !isSelectBoss || timeError">提交</button>
+            <button ion-button class = "submit" type="submit" [disabled]="!todo.valid || myValidators.reason.error || myValidators.boss.error || !isSelectBoss || timeError">提交</button>
           </ion-buttons>
         </ion-col>
         <ion-col width-50>
           <ion-buttons right>
-            <button ion-button [disabled]="!todo.valid || reason.Error || name.Error || !isSelectBoss || timeError">保存</button>
+            <button ion-button [disabled]="!todo.valid || myValidators.reason.error || myValidators.boss.error || !isSelectBoss || timeError">保存</button>
           </ion-buttons>
         </ion-col>
       </ion-row>

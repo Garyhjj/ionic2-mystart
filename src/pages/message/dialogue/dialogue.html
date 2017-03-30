@@ -11,7 +11,7 @@
         <img class="icon" [src]="item.fromPhoto">
         <div class="msg">
           <span [ngClass]="item.toId === userinfo._id ? ' arrow_l_int' : ' arrow_r_int'"></span>
-          <span [ngClass]="item.toId === userinfo._id ? ' arrow_l_out' : ' arrow_r_out'"></span><span>{{item.content}}</span>
+          <span [ngClass]="item.toId === userinfo._id ? ' arrow_l_out' : ' arrow_r_out'"></span><span><span *ngIf="item.unsend">!</span>{{item.content}}</span>
         </div>
         <div class="clearfix"></div>
       </div>

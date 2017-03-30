@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable }        from 'rxjs/Observable';
 import { Subject }           from 'rxjs/Subject';
 import { ValidateService }   from '../../../../services/validate.service';
+import { AttendanceMaintainPage } from '../attendance-maintain';
 
 @Component({
   selector: 'page-new-leave',
@@ -32,6 +33,27 @@ export class NewLeavePage implements  AfterContentChecked{
   tempEndTime:string='';
   startTime;
   endTime;
+  myValidators={
+    boss:{
+      error:'',
+      pass:false,
+      dataset:{
+        vRequired:true,
+        vRequiredMessage:'请选择代理人'
+      }
+    },
+    reason:{
+      error:'',
+      pass:false,
+      dataset:{
+        vRequired:true,
+        vRequiredMessage:'原因不能为空',
+        vMinlength:2,
+        vMinlengthMessage:'原因长度不能少于2位'
+      },
+      value:''
+    },
+  }
   holidayType=[
     {type:'A',name:'年休假'},
     {type:'B',name:'產假 - 產假【98天】'},
@@ -80,7 +102,7 @@ export class NewLeavePage implements  AfterContentChecked{
     this.leaveMes={
       type :'P',
       startTime: '',
-      endTime: '',
+      endTime: "2017-01-01T01:00:00Z",
       boss:'',
       reason:'123'
     }
@@ -131,17 +153,21 @@ export class NewLeavePage implements  AfterContentChecked{
   }
 
   //單獨輸入塊驗證
-  check(event:any,_item:any,Equalto:any): Promise<any>{
-      let item = event.target? event.target : event;
+  check(value,name,Equalto:any): Promise<any>{
       let other:any = Equalto?Equalto:"";
-      return this.validateService.check(item,other).then(function(prams) {
-        _item.Error = prams.mes;
-        _item.pass = !prams.mes;
-        return Promise.resolve(_item);
+      this.myValidators[name].value=value;
+      return this.validateService.check(this.myValidators[name],other).then((prams) =>{
+        this.myValidators[name].error = prams.mes;
+        this.myValidators[name].pass = !prams.mes;
+        return Promise.resolve(this.myValidators);
       });
+      // return Promise.resolve(11);
   }
   leaveForm(end:any){
     console.log(this.todo.value);
     return false;
+  }
+  myholidayDetail() {
+    this.navCtrl.push(AttendanceMaintainPage)
   }
 }

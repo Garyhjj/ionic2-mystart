@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { AttendanceMaintainPage } from './attendance-maintain/attendance-maintain';
+import { NewLeavePage } from './attendance-maintain/new-leave/new-leave';
+
 @Component({
   selector:'page-attendance',
   templateUrl: 'attendance.html'
@@ -14,7 +15,7 @@ export class AttendancePage {
   }
 
   maintain():void{
-    this.navCtrl.push(AttendanceMaintainPage);
+    this.navCtrl.push(NewLeavePage);
   }
 
 }

@@ -36,8 +36,4 @@ export class AttendanceMaintainPage {
   ionViewDidLoad() {
 
   }
-
-  newLeave():void{
-    this.navCtrl.push(NewLeavePage);
-  }
 }

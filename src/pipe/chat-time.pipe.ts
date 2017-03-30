@@ -11,7 +11,6 @@ export class ChatTimePipe implements PipeTransform {
     let minute = mesTime.getMinutes();
     let nowTime = new Date();
     let nowyear = nowTime.getFullYear();
-    let nowmonth = nowTime.getMonth();
     let nowday = nowTime.getDay();
     let show = '';
     if((nowyear - year) > 0) {
