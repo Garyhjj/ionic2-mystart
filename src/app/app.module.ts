@@ -44,7 +44,7 @@ import { NewLeavePage } from "../pages/attendance/attendance-maintain/new-leave/
 let storage = new Storage();
 const config: SocketIoConfig = { url: 'http://10.86.21.170:3701', options: {} };
 
-export function getAuthHttp(http) {
+export function getAuthHttp(http:any) {
   return new AuthHttp(new AuthConfig({
     noJwtError: true,
     noTokenScheme: true, // 如果是false，token前面会自动增加Bearer

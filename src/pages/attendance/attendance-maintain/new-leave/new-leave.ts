@@ -31,8 +31,6 @@ export class NewLeavePage implements  AfterContentChecked{
   hourLeave:string = '0';
   tempStartTime:string='';
   tempEndTime:string='';
-  startTime;
-  endTime;
   myValidators={
     boss:{
       error:'',
@@ -126,7 +124,7 @@ export class NewLeavePage implements  AfterContentChecked{
   }
 
   //初始化原始數據
-  initWork(work):FormGroup{
+  initWork(work:any):FormGroup{
     return this.formBuilder.group({
             type: [work.type, Validators.required],
             startTime: [work.startTime, Validators.required],
@@ -136,7 +134,7 @@ export class NewLeavePage implements  AfterContentChecked{
         });
   }
   // keyup觸發的方法
-  search(item){
+  search(item:any){
     // todo 判断是否正确选择代理人
     if(this.tempBoss){
       this.isSelectBoss = item.value != this.tempBoss? false: true;
@@ -153,7 +151,7 @@ export class NewLeavePage implements  AfterContentChecked{
   }
 
   //單獨輸入塊驗證
-  check(value,name,Equalto:any): Promise<any>{
+  check(value:any,name:string,Equalto:any): Promise<any>{
       let other:any = Equalto?Equalto:"";
       this.myValidators[name].value=value;
       return this.validateService.check(this.myValidators[name],other).then((prams) =>{

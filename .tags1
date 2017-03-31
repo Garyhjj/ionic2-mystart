@@ -4,3 +4,18 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.8	//
+compilerOptions	D:\gary\github\ionic2-mystart\tsconfig.json	/^  "compilerOptions": {$/;"	function	line:2
+allowSyntheticDefaultImports	D:\gary\github\ionic2-mystart\tsconfig.json	/^    "allowSyntheticDefaultImports": true,$/;"	function	line:3
+declaration	D:\gary\github\ionic2-mystart\tsconfig.json	/^    "declaration": false,$/;"	function	line:4
+emitDecoratorMetadata	D:\gary\github\ionic2-mystart\tsconfig.json	/^    "emitDecoratorMetadata": true,$/;"	function	line:5
+experimentalDecorators	D:\gary\github\ionic2-mystart\tsconfig.json	/^    "experimentalDecorators": true,$/;"	function	line:6
+lib	D:\gary\github\ionic2-mystart\tsconfig.json	/^    "lib": [$/;"	function	line:7
+module	D:\gary\github\ionic2-mystart\tsconfig.json	/^    "module": "es2015",$/;"	function	line:11
+moduleResolution	D:\gary\github\ionic2-mystart\tsconfig.json	/^    "moduleResolution": "node",$/;"	function	line:12
+sourceMap	D:\gary\github\ionic2-mystart\tsconfig.json	/^    "sourceMap": true,$/;"	function	line:13
+target	D:\gary\github\ionic2-mystart\tsconfig.json	/^    "target": "es5"$/;"	function	line:14
+include	D:\gary\github\ionic2-mystart\tsconfig.json	/^  "include": [$/;"	function	line:16
+exclude	D:\gary\github\ionic2-mystart\tsconfig.json	/^  "exclude": [$/;"	function	line:19
+compileOnSave	D:\gary\github\ionic2-mystart\tsconfig.json	/^  "compileOnSave": false,$/;"	function	line:23
+atom	D:\gary\github\ionic2-mystart\tsconfig.json	/^  "atom": {$/;"	function	line:24
+rewriteTsconfig	D:\gary\github\ionic2-mystart\tsconfig.json	/^    "rewriteTsconfig": false$/;"	function	line:25

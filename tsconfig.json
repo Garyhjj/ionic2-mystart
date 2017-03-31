@@ -18,8 +18,7 @@
   ],
   "exclude": [
     "node_modules",
-    "src/**/*.spec.ts",
-    "e2e"
+    "src/**/*.spec.ts"
   ],
   "compileOnSave": false,
   "atom": {

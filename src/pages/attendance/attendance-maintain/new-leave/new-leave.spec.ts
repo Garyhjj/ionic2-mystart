@@ -11,7 +11,7 @@ describe('NewLeavePage', () => {
   let comp: NewLeavePage;
   let fixture: ComponentFixture<NewLeavePage>;
   let de: DebugElement;
-  let el: HTMLElement;
+  let el: any;
   let leaveMes={
     type :'P',
     startTime: '',
@@ -43,7 +43,6 @@ describe('NewLeavePage', () => {
     de = fixture.debugElement.query(By.css('.submit'));
     el = de.nativeElement;
   }));
-
   it('一进去不能提交', () => {
     fixture.detectChanges();
     expect(el.disabled).toBe(true);;
