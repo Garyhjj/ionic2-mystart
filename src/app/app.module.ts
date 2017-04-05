@@ -1,15 +1,12 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 
-import { SocketIoModule, SocketIoConfig } from 'ng2-socket-io'
-import { ChatService } from '../services/ChatService';
-
+import { IonicStorageModule } from '@ionic/storage';
 import { Storage } from '@ionic/storage';
 import 'rxjs/add/operator/toPromise';
 import { FormsModule }   from '@angular/forms';
 import { MyApp } from './app.component';
-import { MessagePage } from '../pages/message/message';
-import { DialoguePage } from '../pages/message/dialogue/dialogue';
+
 import { ApplicationPage } from '../pages/application/application';
 import { NamesPage } from '../pages/names/names';
 import { MePage } from '../pages/me/me';
@@ -21,7 +18,6 @@ import '../assets/js/rxjs-extension';
 import { WorksPage } from '../pages/work/works/works';
 import { WorkPage } from '../pages/work/work11/work';
 
-import { ChatTimePipe } from '../pipe/chat-time.pipe';
 
 import { SetPage } from '../pages/me/set/set';
 import { NineCodePage } from '../pages/me/set/nine-code/nine-code';
@@ -37,12 +33,10 @@ import { SignupPage } from '../pages/signup/signup';
 import { AuthHttp, AuthConfig } from 'angular2-jwt';
 import { Http } from '@angular/http';
 
-import { AttendancePage } from '../pages/attendance/attendance';
-import { AttendanceMaintainPage } from '../pages/attendance/attendance-maintain/attendance-maintain';
-import { NewLeavePage } from "../pages/attendance/attendance-maintain/new-leave/new-leave";
+import { ChatModule } from '../pages/chat/chat.module';
+import { AttendanceModule } from '../pages/attendance/attendance.module'
 
 let storage = new Storage();
-const config: SocketIoConfig = { url: 'http://10.86.21.170:3701', options: {} };
 
 export function getAuthHttp(http:any) {
   return new AuthHttp(new AuthConfig({
@@ -57,7 +51,6 @@ export function getAuthHttp(http:any) {
   declarations: [
     MyApp,
     TabsPage,
-    MessagePage,
     ApplicationPage,
     NamesPage,
     MePage,
@@ -71,24 +64,18 @@ export function getAuthHttp(http:any) {
     NineCodePage,
     SignupPage,
     UpdateDetailPage,
-    MyQrPage,
-    AttendancePage,
-    AttendanceMaintainPage,
-    NewLeavePage,
-    DialoguePage,
-    ChatTimePipe
+    MyQrPage
   ],
   imports: [
     IonicModule.forRoot(MyApp, {
       tabsHideOnSubPages: true,
       backButtonText: '',
-    }), FormsModule,SocketIoModule.forRoot(config)
+    }), FormsModule, IonicStorageModule.forRoot(), ChatModule, AttendanceModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     TabsPage,
-    MessagePage,
     ApplicationPage,
     NamesPage,
     MePage,
@@ -101,13 +88,9 @@ export function getAuthHttp(http:any) {
     NineCodePage,
     SignupPage,
     UpdateDetailPage,
-    MyQrPage,
-    AttendancePage,
-    AttendanceMaintainPage,
-    NewLeavePage,
-    DialoguePage
+    MyQrPage
   ],
-  providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler }, DataService, Storage, ValidateService, ChatService,
+  providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler }, DataService, ValidateService,
     {
         provide: AuthHttp,
         useFactory: getAuthHttp,

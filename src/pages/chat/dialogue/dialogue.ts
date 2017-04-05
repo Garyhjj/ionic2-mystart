@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavParams } from 'ionic-angular';
 // import { Message } from '../../classes/Message';
 import { Subscription } from 'rxjs/Rx';
-import { ChatService } from '../../../services/ChatService';
+import { ChatService } from '../services/chatService';
 import { Config } from '../../../config/default';
 
 @Component({

@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { DialoguePage } from './dialogue/dialogue';
-import { User } from '../../interfaces/user';
-import { ChatService } from '../../services/ChatService';
+import { DialoguePage } from '../dialogue/dialogue';
+import { User } from '../../../interfaces/user';
+import { ChatService } from '../services/chatService';
 /*
   Generated class for the Message page.
 

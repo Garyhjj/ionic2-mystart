@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { NewLeavePage } from './new-leave/new-leave';
 import * as echarts from 'echarts';
 
 class Chart {
@@ -8,10 +7,10 @@ class Chart {
   value:number
 }
 @Component({
-  selector: 'page-attendance-maintain',
-  templateUrl: 'attendance-maintain.html'
+  selector: 'page-hoildayDetail',
+  templateUrl: 'hoildayDetail.html'
 })
-export class AttendanceMaintainPage {
+export class HoildayDetailPage {
 
   availableHoliday = {
     year: 5,

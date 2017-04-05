@@ -32,9 +32,7 @@ export class MyApp {
       Splashscreen.hide();
       this.registerBackButtonAction();//注册返回按键事件
       // set to either landscape 限制为竖屏显示
-      ScreenOrientation.lockOrientation('portrait').catch((error) => {
-        console.log(error);
-      });
+      // ScreenOrientation.lockOrientation('portrait');
 
     });
   }

@@ -3,8 +3,8 @@ import { By }              from '@angular/platform-browser';
 import { DebugElement }    from '@angular/core';
 import { App, Config, Form, IonicModule, Keyboard, DomController, MenuController, NavController, Platform, NavParams, GestureController } from 'ionic-angular';
 import { NewLeavePage } from './new-leave';
-import { ConfigMock, PlatformMock, NavMock } from '../../../../mocks';
-import { ValidateService }   from '../../../../services/validate.service';
+import { ConfigMock, PlatformMock, NavMock } from '../../../mocks';
+import { ValidateService }   from '../../../services/validate.service';
 
 describe('NewLeavePage', () => {
 

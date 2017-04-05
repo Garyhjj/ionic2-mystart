@@ -3,8 +3,8 @@ import { NavController, NavParams } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable }        from 'rxjs/Observable';
 import { Subject }           from 'rxjs/Subject';
-import { ValidateService }   from '../../../../services/validate.service';
-import { AttendanceMaintainPage } from '../attendance-maintain';
+import { ValidateService }   from '../../../services/validate.service';
+import { HoildayDetailPage } from '../hoildayDetail/hoildayDetail';
 
 @Component({
   selector: 'page-new-leave',
@@ -166,6 +166,6 @@ export class NewLeavePage implements  AfterContentChecked{
     return false;
   }
   myholidayDetail() {
-    this.navCtrl.push(AttendanceMaintainPage)
+    this.navCtrl.push(HoildayDetailPage)
   }
 }

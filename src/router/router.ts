@@ -1,7 +1,7 @@
 import { NavController, NavParams } from 'ionic-angular';
 import { BookLibraryPage } from '../pages/book-library/book-library';
 import { WorksPage } from '../pages/work/works/works';
-import { AttendancePage } from '../pages/attendance/attendance';
+import { MainPage } from '../pages/attendance/main/main';
 export class MyRouter {
   constructor() { }
 
@@ -15,7 +15,7 @@ export class MyRouter {
         navCtrl.push(WorksPage);
         break;
       case 3:
-        navCtrl.push(AttendancePage);
+        navCtrl.push(MainPage);
         break;
       default:
         break;

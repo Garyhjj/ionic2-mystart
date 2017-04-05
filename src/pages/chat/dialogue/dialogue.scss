@@ -94,18 +94,20 @@ page-dialogue {
           display:inline-block;
           font-size: 35px;
           &.smile{
-            right:17%;
+            right:-40%;
+            top:-16%;
           }
           &.add{
             right:4%;
+            top:-16%;
           }
         }
         .send {
           position: absolute;
-          bottom:1%;
+          top:-20%;
           right:1%;
-          height: 36px;
-          width: 13%;
+          height: 34px;
+          width: 50%;
           background-color: #14b012;
         }
         .input_text {

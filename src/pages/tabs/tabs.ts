@@ -1,11 +1,11 @@
 import { Component, ViewChild } from '@angular/core';
 import {Tabs} from "ionic-angular";
-import { MessagePage } from '../message/message';
+import { MessagePage } from '../chat/message/message';
 import { ApplicationPage } from '../application/application';
 import { NamesPage } from '../names/names';
 import { MePage } from '../me/me';
-import { ChatService }  from '../../services/ChatService';
-import { Chat }  from '../../interfaces/chat';
+import { ChatService }  from '../chat/services/chatService';
+import { Chat }  from '../chat/interfaces/chat';
 
 @Component({
   templateUrl: 'tabs.html'

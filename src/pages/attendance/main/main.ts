@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { NewLeavePage } from './attendance-maintain/new-leave/new-leave';
+import { NewLeavePage } from '../new-leave/new-leave';
 
 @Component({
-  selector:'page-attendance',
-  templateUrl: 'attendance.html'
+  selector:'page-main',
+  templateUrl: 'main.html'
 })
-export class AttendancePage {
+export class MainPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {}
 

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Socket } from 'ng2-socket-io';
 import { Observable }        from 'rxjs/Observable';
-import { User } from '../interfaces/user';
-import { Config } from '../config/default';
+import { User } from '../../../interfaces/user';
+import { Config } from '../../../config/default';
 import { Storage } from '@ionic/storage';
 import { Chat } from '../interfaces/chat';
 import { Subject }           from 'rxjs/Subject';
@@ -16,9 +16,8 @@ export class ChatService {
   public sendTerms = new Subject<any>();
   public unReceiveTerms = new Subject<any>();
   time: number =0;
-  reLogin;
   unSendMessages:any =[];
-  tempMes:any =[];
+  tempMes:Chat[] =[];
   constructor(private socket: Socket,private storage: Storage) {
     // 获取服务器时间
     this.getTime().subscribe((time) => {
@@ -42,7 +41,7 @@ export class ChatService {
     })
   }
   // 信息储存到本地
-  saveMes(mes,newMes){
+  saveMes(mes:Chat[],newMes:any){
     let user:User = this.getUser();
     this.storage.set(user._id+'chat',mes).then((item) => {
       this.updateTerms.next(true);
@@ -69,7 +68,7 @@ export class ChatService {
     return this.tempMes;
   }
   // 发送消息
-  sendMessage(msg: string, toId:string, chatId,insideId) {
+  sendMessage(msg: string, toId:string, chatId:string,insideId:number) {
     let num = 0;
     let user:User = this.getUser();
     let newMes = {
@@ -98,16 +97,16 @@ export class ChatService {
 
   }
   // 设置正在聊天的的聊天室id
-  setChattingId(id){
+  setChattingId(id:string){
     this.storage.set('chattingId',id);
   }
 
   // 归零未读消息
-  reSetUnreadCount(index){
+  reSetUnreadCount(index:number){
     this.tempMes[index].unreadCount = 0;
   }
   // 更新未读消息
-  changeUnreadCount(mes){
+  changeUnreadCount(mes:Chat[]){
     if(mes[0].mes[mes[0].mes.length-1].fromId === this.getUser()._id) {
       return Promise.resolve(mes);
     }else {
@@ -127,7 +126,7 @@ export class ChatService {
   }
   // 更新本地消息
   updateLoalMes(newMes:any){
-    let localMes = this.getTempMes();
+    let localMes:Chat[] = this.getTempMes();
     // 不能每次都异步get 会漏数据
     // this.getMes().then((localMes) => {
       let updateMes:Chat[] = localMes.filter((mes) => mes.id === newMes.id);
@@ -148,11 +147,11 @@ export class ChatService {
     // })
   }
   // 插入离线消息
-  updateOutlineMes(OutlineMessages){
+  updateOutlineMes(OutlineMessages:any){
     if(OutlineMessages.length === 0) return;
     // let localMes = this.getTempMes();
-    this.getMes().then((localMes) => {
-      let newLocalMes = [];
+    this.getMes().then((localMes:Chat[]) => {
+      let newLocalMes:any = [];
       for(let i = 0 ; i< OutlineMessages.length; i++) {
         let updateMes:Chat[] = localMes.filter((mes) => mes.id === OutlineMessages[i].id);
         let otherMes:Chat[] = localMes.filter((mes) => mes.id != OutlineMessages[i].id);
@@ -185,7 +184,7 @@ export class ChatService {
   }
 
   // 发送是否打字的状态
-  sendStatus(status,toId){
+  sendStatus(status:string,toId:string){
     let user:User = this.getUser();
     this.socket.emit("status",{
       toId:toId,
@@ -200,7 +199,7 @@ export class ChatService {
     return this.socket
       .fromEvent<any>("status");
   }
-  hasGottenMes(mes){
+  hasGottenMes(mes:any){
     this.socket.emit('received',mes);
   }
 }
