@@ -10,7 +10,7 @@
     </ion-buttons>
   </ion-navbar>
 </ion-header>
-<ion-content class="list-avatar-page" *ngIf="user">
+<ion-content class="list-avatar-page">
   <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
   <ion-list>
     <ion-item *ngFor="let item of messageListItem;let i = index;trackBy:trackBymessageListItem" (click)="goToMessageDetailPage(item,i)">

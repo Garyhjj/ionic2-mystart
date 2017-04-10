@@ -1,42 +1,47 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewChecked, ChangeDetectorRef} from '@angular/core';
 import { NavParams } from 'ionic-angular';
-// import { Message } from '../../classes/Message';
 import { Subscription } from 'rxjs/Rx';
 import { ChatService } from '../services/chatService';
 import { Config } from '../../../config/default';
+import { Keyboard } from '@ionic-native/keyboard';
 
 @Component({
   selector: 'page-dialogue',
   templateUrl: 'dialogue.html'
 })
 
-export class DialoguePage implements OnInit {
-  list=[];
+export class DialoguePage implements OnInit, AfterViewChecked {
+  chatting:boolean
+  list:any=[];
   input_text:string;
-  userinfo;
+  userinfo:any;
   myurl: string = new Config().baseUrl;
-  userName;
-  userNickName;
-  chatTarget;
-  status = '';
-  constructor(public params: NavParams, private chatService: ChatService) {
+  chatTarget:any;
+  status:string = '';
+  addS:boolean = false;;
+  constructor(public params: NavParams, private chatService: ChatService, private ref: ChangeDetectorRef, private keyboard: Keyboard) {
   }
 
   ngOnInit() {
+    this.chatting = true;
     this.chatTarget = this.params.data.mes;
     // 设置聊天室id
     this.chatService.setChattingId(this.chatTarget.id);
     let _index:number = this.params.data._index;
+    // 对未读数目清零
     this.chatService.reSetUnreadCount(_index);
     // 获取历史消息
-    this.chatService.getMes().then((mes) => {
-      this.list = mes[_index].mes;
-      mes[_index].unreadCount = 0;
-      this.chatService.saveMes(mes,[]);
-    })
+    this.list = this.chatTarget.mes;
+    // 对未读数目清零
+    // this.chatService.getMes().then((mes) => {
+    //   this.list = mes[_index].mes
+    //   mes[_index].mes.unreadCount = 0;
+    //   this.chatService.saveMes(mes,[]);
+    // })
     this.userinfo = JSON.parse(localStorage.getItem('user'));
     // 接收新消息
     this.chatService.getNetMessage().subscribe((obj) => {
+      if(!this.chatting) return;
       if(obj.fromId === this.userinfo._id){
         for(let i = this.list.length-1;i>=0;i--){
           if(this.list[i].insideId === obj.insideId){
@@ -48,25 +53,43 @@ export class DialoguePage implements OnInit {
       }else {
         this.list.push(obj);
       }
+      this.ref.detectChanges();
+      let chatArea = document.getElementsByClassName('scroll-content')[2];
+      chatArea.scrollTop = chatArea.scrollHeight;
     });
     // 接收状态消息
     this.chatService.getStatus().subscribe((obj) => {
+      if(!this.chatting) return;
       if(obj.fromId === this.chatTarget.toId){
         this.status= obj.status === "writing"? "       正在输入":"";
+        this.ref.detectChanges();
       }
     })
     this.chatService.unReceiveTerms.subscribe((status) => {
+      if(!this.chatting) return;
       this.chatService.getMes().then((mes) => {
         this.list = mes[_index].mes;
+        this.ref.detectChanges();
       })
+    })
+
+    this.keyboard.onKeyboardShow().subscribe((e) => {
+      if(!this.chatting) return;
+      let chatArea = document.getElementsByClassName('scroll-content')[2];
+      chatArea.scrollTop = chatArea.scrollHeight;
     })
   }
 
+  ngAfterViewChecked() {
+    let chatArea = document.getElementsByClassName('scroll-content')[2];
+    chatArea.scrollTop = chatArea.scrollHeight;
+  }
   ionViewDidEnter() {
-    document.getElementById('msgarea')
+
   }
 
   ionViewWillLeave() {
+    this.chatting = false;
     // 设置正在聊天的房间号为空
     this.chatService.setChattingId('');
     this.chatService.getMes().then((mes) => {
@@ -103,7 +126,14 @@ export class DialoguePage implements OnInit {
     }
   }
   // 发送状态
-  sendStatus(status){
+  sendStatus(status:string){
     this.chatService.sendStatus(status,this.chatTarget.toId);
   }
+
+  inputFocus() {
+    this.addS = false;
+    let chatArea = document.getElementsByClassName('scroll-content')[2];
+    chatArea.scrollTop = chatArea.scrollHeight;
+  }
+
 }

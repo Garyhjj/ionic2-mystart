@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { Platform, ToastController, Nav, IonicApp } from 'ionic-angular';
-import { StatusBar, Splashscreen, ScreenOrientation } from 'ionic-native';
+import { StatusBar, Splashscreen } from 'ionic-native';
 import { Storage } from '@ionic/storage';
 import { NineCodePage } from '../pages/me/set/nine-code/nine-code';
 import { SignupPage } from '../pages/signup/signup';
@@ -31,8 +31,6 @@ export class MyApp {
       StatusBar.styleDefault();
       Splashscreen.hide();
       this.registerBackButtonAction();//注册返回按键事件
-      // set to either landscape 限制为竖屏显示
-      // ScreenOrientation.lockOrientation('portrait');
 
     });
   }

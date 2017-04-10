@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { DialoguePage } from '../dialogue/dialogue';
 import { User } from '../../../interfaces/user';
 import { ChatService } from '../services/chatService';
+import { Chat } from '../interfaces/chat';
 /*
   Generated class for the Message page.
 
@@ -14,31 +15,30 @@ import { ChatService } from '../services/chatService';
   templateUrl: 'message.html'
 })
 export class MessagePage {
-  messageListItem;
-  constructor(public navCtrl: NavController, public navParams: NavParams, private chatService: ChatService) {
+  messageListItem:Chat[];
+  constructor(public navCtrl: NavController, public navParams: NavParams, private chatService: ChatService, private ref: ChangeDetectorRef) {
 
   }
 
   user:User;
-
-
   ionViewDidLoad() {
     this.user = JSON.parse(localStorage.getItem('user'));
     // 观察是否有新消息
     this.chatService.updateTerms.subscribe((item) => {
       this.chatService.getMes().then((mes) => {
         this.messageListItem = mes;
+        this.ref.detectChanges();
       })
-      // this.messageListItem = this.chatService.tempMes();
     })
   }
   ionViewWillEnter() {
     this.chatService.getMes().then((mes) => {
       this.messageListItem = mes;
     })
-    // this.messageListItem = this.chatService.getTempMes();
   }
-  goToMessageDetailPage(item,index) {
+  ionViewWillLeave() {
+  }
+  goToMessageDetailPage(item:Chat,index:number) {
     if (item.type === 'dialogue') {
       this.navCtrl.push(DialoguePage, {
         mes:item,

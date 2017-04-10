@@ -10,7 +10,7 @@ import { ChatService } from './services/chatService';
 const config: SocketIoConfig = { url: 'http://10.86.21.170:3701', options: {} };
 
 @NgModule({
-  imports:      [ CommonModule , IonicModule, SocketIoModule.forRoot(config) ],
+  imports:      [ CommonModule, IonicModule, SocketIoModule.forRoot(config) ],
   declarations: [
     ChatTimePipe,
     MessagePage,

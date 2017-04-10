@@ -35,7 +35,7 @@ import { Http } from '@angular/http';
 
 import { ChatModule } from '../pages/chat/chat.module';
 import { AttendanceModule } from '../pages/attendance/attendance.module'
-
+import { PluginsModule } from '../plugin/plugins.module';
 let storage = new Storage();
 
 export function getAuthHttp(http:any) {
@@ -70,7 +70,7 @@ export function getAuthHttp(http:any) {
     IonicModule.forRoot(MyApp, {
       tabsHideOnSubPages: true,
       backButtonText: '',
-    }), FormsModule, IonicStorageModule.forRoot(), ChatModule, AttendanceModule
+    }), FormsModule, IonicStorageModule.forRoot(), ChatModule, AttendanceModule, PluginsModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -90,7 +90,7 @@ export function getAuthHttp(http:any) {
     UpdateDetailPage,
     MyQrPage
   ],
-  providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler }, DataService, ValidateService,
+  providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler }, DataService, ValidateService, 
     {
         provide: AuthHttp,
         useFactory: getAuthHttp,

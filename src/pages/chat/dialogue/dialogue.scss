@@ -4,6 +4,9 @@ page-dialogue {
     $chatHeight:93%;
     .chatArea {
       height: $chatHeight;
+      &.up {
+        height: $chatHeight - 44%
+      }
     }
     .msgarea {
         padding: 10px 0px;
@@ -123,5 +126,14 @@ page-dialogue {
               border-bottom: 1px solid red;
             }
         }
+    }
+    .addS {
+      height:51%;
+    }
+    .box {
+      margin-left: 10%;
+      width: 80%;
+      display: flex;
+      justify-content:space-between;
     }
 }

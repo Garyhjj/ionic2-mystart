@@ -3,37 +3,51 @@
     <ion-title *ngIf="chatTarget">{{chatTarget.toName}}{{status}}</ion-title>
   </ion-navbar>
 </ion-header>
-<ion-content padding class="chatArea">
-  <div *ngFor="let item of list">
+<ion-content padding class="chatArea" [class.up]="addS">
+  <div *ngFor="let item of list;trackBy:trackByList" (click)="inputFocus()">
     <div class="msgarea">
       <div [ngClass]="item.fromId != userinfo._id ? 'other' : 'me'">
         <!--<img class="icon" src={{item.avatarSrc}}>-->
         <img class="icon" [src]="item.fromPhoto">
         <div class="msg">
           <span [ngClass]="item.toId === userinfo._id ? ' arrow_l_int' : ' arrow_r_int'"></span>
-          <span [ngClass]="item.toId === userinfo._id ? ' arrow_l_out' : ' arrow_r_out'"></span><span><span *ngIf="item.unsend">!</span>{{item.content}}</span>
+          <span [ngClass]="item.toId === userinfo._id ? ' arrow_l_out' : ' arrow_r_out'"></span><span *ngIf="item.unSend">!</span><span>{{item.content}}</span>
         </div>
         <div class="clearfix"></div>
       </div>
     </div>
   </div>
-  <div class="input">
+  <div class="input" *ngIf= "list" [class.addS]="addS">
     <ion-grid>
       <ion-row align-items-start>
         <ion-col>
           <span class="iconfontyyy">&#xe68b;</span>
         </ion-col>
         <ion-col>
-          <input class="input_text" [(ngModel)]="input_text" name="input_text" (input)="sendStatus('writing')" (blur)="sendStatus('blur')">
+          <input class="input_text" [(ngModel)]="input_text" name="input_text" (focus)="inputFocus()" (input)="sendStatus('writing')" (blur)="sendStatus('blur')">
         </ion-col>
         <ion-col>
           <span class="iconfontyyy smile">&#xe61e;</span>
         </ion-col>
         <ion-col>
-          <span class="iconfontyyy add" *ngIf = "!input_text">&#xe649;</span>
+          <span class="iconfontyyy add" *ngIf = "!input_text" (click)="addS = !addS">&#xe649;</span>
           <button ion-button class="send" (click)="sendMes()"*ngIf = "input_text">发送</button>
         </ion-col>
       </ion-row>
     </ion-grid>
+    <div class="box" *ngIf="addS">
+      <div class="item">
+        3434
+      </div>
+      <div class="item">
+        3434
+      </div>
+      <div class="item">
+        3434
+      </div>
+      <div class="item">
+        3434
+      </div>
+    </div>
   </div>
 </ion-content>
