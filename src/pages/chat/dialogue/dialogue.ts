@@ -19,6 +19,7 @@ export class DialoguePage implements OnInit, AfterViewChecked {
   chatTarget:any;
   status:string = '';
   addS:boolean = false;;
+  frontBas64:string = 'data:image/jpeg;base64,';
   constructor(public params: NavParams, private chatService: ChatService, private ref: ChangeDetectorRef, private keyboard: Keyboard) {
   }
 
@@ -32,12 +33,6 @@ export class DialoguePage implements OnInit, AfterViewChecked {
     this.chatService.reSetUnreadCount(_index);
     // 获取历史消息
     this.list = this.chatTarget.mes;
-    // 对未读数目清零
-    // this.chatService.getMes().then((mes) => {
-    //   this.list = mes[_index].mes
-    //   mes[_index].mes.unreadCount = 0;
-    //   this.chatService.saveMes(mes,[]);
-    // })
     this.userinfo = JSON.parse(localStorage.getItem('user'));
     // 接收新消息
     this.chatService.getNetMessage().subscribe((obj) => {
@@ -119,9 +114,10 @@ export class DialoguePage implements OnInit, AfterViewChecked {
         content:this.input_text,
         unSend:true,
         time:Date.parse(new Date().toString()),
-        insideId:insideId
+        insideId:insideId,
+        type:'T'
       })
-      this.chatService.sendMessage(this.input_text,this.chatTarget.toId,this.chatTarget.id,insideId);
+      this.chatService.sendMessage(this.input_text,this.chatTarget.toId,this.chatTarget.id,insideId,'T');
       this.input_text = '';
     }
   }
@@ -135,5 +131,27 @@ export class DialoguePage implements OnInit, AfterViewChecked {
     let chatArea = document.getElementsByClassName('scroll-content')[2];
     chatArea.scrollTop = chatArea.scrollHeight;
   }
-
+  src1:any
+  sendPicture() {
+    this.chatService.getPicure(0).then((data) => {
+      if(!data) return;
+      let insideId =Date.parse(new Date().toString())+Math.random()*1000;
+      this.src1 = data;
+      this.list.push({
+        toId:this.chatTarget.toId,
+        fromId:this.userinfo._id,
+        name:this.userinfo.name,
+        fromPhoto:this.myurl + this.userinfo.photo,
+        content:this.src1,
+        unSend:true,
+        type:'P',
+        time:Date.parse(new Date().toString()),
+        insideId:insideId
+      })
+      this.chatService.sendMessage(this.src1,this.chatTarget.toId,this.chatTarget.id,insideId,'P');
+    });
+  }
+  clearM() {
+    this.chatService.clearMes();
+  }
 }

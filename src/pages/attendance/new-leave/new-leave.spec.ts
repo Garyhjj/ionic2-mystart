@@ -5,6 +5,7 @@ import { App, Config, Form, IonicModule, Keyboard, DomController, MenuController
 import { NewLeavePage } from './new-leave';
 import { ConfigMock, PlatformMock, NavMock } from '../../../mocks';
 import { ValidateService }   from '../../../services/validate.service';
+import '../../../assets/js/rxjs-extension';
 
 describe('NewLeavePage', () => {
 
@@ -44,6 +45,7 @@ describe('NewLeavePage', () => {
     el = de.nativeElement;
   }));
   it('一进去不能提交', () => {
+    comp.ionViewDidLoad();
     fixture.detectChanges();
     expect(el.disabled).toBe(true);;
   });
@@ -165,6 +167,7 @@ describe('NewLeavePage', () => {
     comp.todo.controls['reason'].setValue('666')
     comp.todo.controls['startTime'].setValue("2017-01-01T01:00:00Z")
     comp.todo.controls['endTime'].setValue("2017-01-01T05:00:00Z")
+    comp.search('xiaomi')
     comp.getBoss('xiaomi')
     fixture.detectChanges()
     expect(comp.isSelectBoss).toBe(true);
@@ -189,4 +192,15 @@ describe('NewLeavePage', () => {
       expect(valid.boss.error).toBe(valid.boss.dataset.vRequiredMessage);;
     });
   });
+  it('提交', () => {
+    comp.leaveForm();
+    fixture.detectChanges()
+    expect(true).toBe(true);;
+  });
+  it('跳转', () => {
+    comp.myholidayDetail();
+    fixture.detectChanges()
+    expect(true).toBe(true);;
+  });
+
 });

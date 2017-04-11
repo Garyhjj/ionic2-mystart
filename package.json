@@ -8,7 +8,7 @@
     "build": "ionic-app-scripts build",
     "ionic:build": "ionic-app-scripts build",
     "ionic:serve": "ionic-app-scripts serve",
-    "test": "karma start ./test-config/karma.conf.js"
+    "test": "karma start ./test-config/karma.conf.js --coverage"
   },
   "dependencies": {
     "@angular/common": "2.4.8",
@@ -34,10 +34,12 @@
     "@ionic-native/transfer": "^3.4.4",
     "@ionic-native/vibration": "^3.4.4",
     "@ionic/storage": "2.0.0",
+    "codelyzer": "^2.0.0-beta.4",
     "ionic-angular": "2.3.0",
     "ionicons": "3.0.0",
     "rxjs": "5.0.1",
     "sw-toolbox": "3.4.0",
+    "tslint": "^4.0.0",
     "zone.js": "0.7.2"
   },
   "devDependencies": {
@@ -48,9 +50,12 @@
     "@types/node": "^7.0.12",
     "angular2-template-loader": "^0.6.2",
     "html-loader": "^0.4.5",
+    "istanbul-instrumenter-loader": "^2.0.0",
     "jasmine": "^2.5.3",
+    "jasmine-spec-reporter": "^3.2.0",
     "karma": "^1.5.0",
     "karma-chrome-launcher": "^2.0.0",
+    "karma-coverage-istanbul-reporter": "^1.0.0",
     "karma-jasmine": "^1.1.0",
     "karma-jasmine-html-reporter": "^0.2.2",
     "karma-sourcemap-loader": "^0.3.7",
@@ -58,6 +63,7 @@
     "null-loader": "^0.1.1",
     "protractor": "4.0.13",
     "ts-loader": "^2.0.3",
+    "ts-node": "^3.0.2",
     "typescript": "2.0.9"
   },
   "cordovaPlugins": [

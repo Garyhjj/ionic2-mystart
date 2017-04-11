@@ -25,8 +25,13 @@ page-dialogue {
             font-size: 16px;
             display: inline-block;
             padding: 7px 10px;
-            max-width: 225px;
+            max-width: 70%;
             border-radius: 7px;
+            &.img {
+              max-width: 50%;
+              padding:0px 0px;
+              border:none;
+            }
         }
         .icon {
             width: 35px;
@@ -37,6 +42,9 @@ page-dialogue {
                 background-color: #9fe757;
                 float: right;
                 margin-right: 10px;
+                &.img {
+                  background:none;
+                }
                 .arrow_r_int {
                     width: 0px;
                     height: 0px;

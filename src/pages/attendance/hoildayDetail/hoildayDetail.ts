@@ -72,7 +72,7 @@ export class HoildayDetailPage {
         top: '3%',
         data: dataName,
         textStyle: {
-          fontSize:15
+          fontSize:14
         }
       },
       series: [

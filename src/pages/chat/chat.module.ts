@@ -7,7 +7,7 @@ import { DialoguePage } from './dialogue/dialogue';
 import { ChatTimePipe } from './pipe/chat-time.pipe';
 import { ChatService } from './services/chatService';
 
-const config: SocketIoConfig = { url: 'http://10.86.21.170:3701', options: {} };
+const config: SocketIoConfig = { url: 'http://10.86.21.56:3701', options: {} };
 
 @NgModule({
   imports:      [ CommonModule, IonicModule, SocketIoModule.forRoot(config) ],

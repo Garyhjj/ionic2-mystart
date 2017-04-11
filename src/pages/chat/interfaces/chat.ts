@@ -5,7 +5,7 @@ export interface Chat {
   toName:string;
   fromName:string;
   toPhoto:string;
-  mes:[{content:string,time:number,fromId:string,toId:string,fromPhoto:string}];
+  mes:[{content:string,time:number,fromId:string,toId:string,fromPhoto:string,type:string}];
   unreadCount:number;
   type:string;
 }

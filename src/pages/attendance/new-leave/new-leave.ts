@@ -110,16 +110,13 @@ export class NewLeavePage implements  AfterContentChecked{
       .distinctUntilChanged()   // ignore if next search term is same as previous
       .switchMap(term => {
         if(term){
-        console.log(123)
         return Observable.of<any>([{name:'xiaomi'},{name:'xiaodong'}])
       }else{
-        console.log(456);
         return Observable.of<any>([])
       }})
       .catch(error => {
         // TODO: real error handling
-        console.log(error);
-        return Observable.of<number>(678);
+        return Observable.of<string>(error);
       });
   }
 
@@ -161,7 +158,7 @@ export class NewLeavePage implements  AfterContentChecked{
       });
       // return Promise.resolve(11);
   }
-  leaveForm(end:any){
+  leaveForm(){
     console.log(this.todo.value);
     return false;
   }

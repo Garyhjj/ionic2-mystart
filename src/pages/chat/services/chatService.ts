@@ -9,6 +9,7 @@ import { Subject }           from 'rxjs/Subject';
 import { Vibration } from '@ionic-native/vibration';
 import { Network } from '@ionic-native/network';
 import { LocalNotifications } from '@ionic-native/local-notifications';
+import { Camera } from 'ionic-native';
 
 @Injectable()
 export class ChatService {
@@ -23,6 +24,7 @@ export class ChatService {
   unSendMessages: any = [];
   tempMes: Chat[] = [];
   hasNet: boolean = true;
+  num:number = 1;
   constructor(
     private socket: Socket,
     private storage: Storage,
@@ -81,11 +83,87 @@ export class ChatService {
         title: newMes.name,
         text: newMes.content,
         led: 'FF0000',
-        sound: null
       });
       this.vibration.vibrate([200, 80, 200]);
     }, 10)
 
+  }
+  getPicure(type:number) {
+    let options = {
+      //这些参数可能要配合着使用，比如选择了sourcetype是0，destinationtype要相应的设置
+      quality: 100,                                            //相片质量0-100
+      allowEdit: true,                                        //在选择之前允许修改截图
+      destinationType: Camera.DestinationType.DATA_URL,
+      sourceType: type,                                         //从哪里选择图片：PHOTOLIBRARY=0，相机拍照=1，SAVEDPHOTOALBUM=2。0和1其实都是本地图库
+      encodingType: Camera.EncodingType.JPEG,                   //保存的图片格式： JPEG = 0, PNG = 1
+      targetWidth: 200,                                        //照片宽度
+      targetHeight: 200,                                       //照片高度
+      mediaType: 0,                                             //可选媒体类型：圖片=0，只允许选择图片將返回指定DestinationType的参数。 視頻格式=1，允许选择视频，最终返回 FILE_URI。ALLMEDIA= 2，允许所有媒体类型的选择。
+      cameraDirection: 0,                                       //枪后摄像头类型：Back= 0,Front-facing = 1
+      saveToPhotoAlbum: true                                   //保存进手机相册
+    };
+    return Camera.getPicture(options).then((imageData) => {
+      // imageData is a base64 encoded string
+      let base64Image = "" + imageData;
+      return Promise.resolve(base64Image)
+      // this.fileTransfer.upload(this.base64Image, this.url + "user/update/picture", this.uploadOptions)
+      //   .then((data: any) => {
+      //     console.log(data.response);
+      //     this.serverPhoto = this.base64Image;
+      //     localStorage.setItem('newPicture',this.base64Image);
+      //   }, (err) => {
+      //     console.log('服务器没响应')
+      //   })
+    }, (err) => {
+      console.log(err);
+    });
+  }
+  clearMes():void{
+    let user: User = this.getUser();
+    let chat:any;
+    if (JSON.parse(localStorage.getItem('user'))._id === '58c756fbd87f6f0b082ff472') {
+      chat = [{
+        id: '58c756fbd87f6f0b082ff472' + '58c79aa4e82b541968c9a29f',
+        fromId: '58c756fbd87f6f0b082ff472',
+        toId: '58c79aa4e82b541968c9a29f',
+        toName: '吴汉三',
+        fromName: '杨元文',
+        toPhoto: 'http://10.86.21.56:3700/user/photo/hansan.wu.jpg',
+        mes: [{
+          content: '小文哥，我穷',
+          time: 1480338091398,
+          fromId: '58c79aa4e82b541968c9a29f',
+          toId: '58c756fbd87f6f0b082ff472',
+          fromPhoto: 'http://10.86.21.56:3700/user/photo/hansan.wu.jpg',
+          type:'T'
+        }],
+        unreadCount: 1,
+        type: "dialogue"
+      }]
+
+    } else {
+      chat = [{
+        id: '58c756fbd87f6f0b082ff472' + '58c79aa4e82b541968c9a29f',
+        fromId: '58c79aa4e82b541968c9a29f',
+        toId: '58c756fbd87f6f0b082ff472',
+        toName: '杨元文',
+        fromName: '吴汉三',
+        toPhoto: 'http://10.86.21.56:3700/user/photo/yuanwen.yang.jpg',
+        mes: [{
+          content: '小三哥，我穷',
+          time: 1480338091298,
+          fromId: '58c756fbd87f6f0b082ff472',
+          toId: '58c79aa4e82b541968c9a29f',
+          fromPhoto: 'http://10.86.21.56:3700/user/photo/yuanwen.yang.jpg',
+          type:'T'
+        }],
+        unreadCount: 1,
+        type: "dialogue"
+      }]
+    }
+    this.storage.set(user._id + 'chat', chat).then((item) => {
+      this.updateTerms.next(true);
+    })
   }
   // 信息储存到本地
   saveMes(mes: Chat[], newMes: any) {
@@ -97,13 +175,11 @@ export class ChatService {
       if (newMes.length > 0) {
         this.unReceiveTerms.next(true);
         if (newMes[0].fromId != this.getUser()._id) {
-          console.log(2)
           this.hasGottenMes(newMes);
-          this.vibrate(newMes);
+          this.vibrate(newMes[newMes.length-1]);
         }
       } else {
         if (newMes.fromId != this.getUser()._id) {
-          console.log(1)
           this.hasGottenMes(newMes);
           this.vibrate(newMes);
         }
@@ -120,7 +196,7 @@ export class ChatService {
     return this.tempMes;
   }
   // 发送消息
-  sendMessage(msg: string, toId: string, chatId: string, insideId: number) {
+  sendMessage(msg: string, toId: string, chatId: string, insideId: number,type:string) {
     let user: User = this.getUser();
     let newMes = {
       id: chatId,
@@ -129,8 +205,9 @@ export class ChatService {
       name: user.name,
       fromPhoto: this.myurl + user.photo,
       content: msg,
+      type:type,
       time: this.time,
-      insideId: insideId
+      insideId: insideId,
     }
     if (this.socket.ioSocket.connected) {
       if (this.unSendMessages.length > 0) {
@@ -194,7 +271,8 @@ export class ChatService {
       time: newMes.time,
       fromId: newMes.fromId,
       toId: newMes.toId,
-      fromPhoto: newMes.fromPhoto
+      fromPhoto: newMes.fromPhoto,
+      type:newMes.type
     });
     // let newLocalMes: Chat[] = updateMes.concat(otherMes);
     // this.saveMes(newLocalMes,newMes);
@@ -220,7 +298,8 @@ export class ChatService {
           time: OutlineMessages[i].time,
           fromId: OutlineMessages[i].fromId,
           toId: OutlineMessages[i].toId,
-          fromPhoto: OutlineMessages[i].fromPhoto
+          fromPhoto: OutlineMessages[i].fromPhoto,
+          type: OutlineMessages[i].type
         });
         updateMes[0].unreadCount++;
         newLocalMes = updateMes.concat(otherMes)

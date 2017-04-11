@@ -25,7 +25,7 @@
       </ion-note>
     </ion-item>
   </ion-list>
-  <form [formGroup]="todo" *ngIf="todo" (ngSubmit)="leaveForm(end)">
+  <form [formGroup]="todo" *ngIf="todo" (ngSubmit)="leaveForm()">
     <ion-list>
       <ion-item [class.has-error]="type.Error" [class.has-success]="type.pass">
         <ion-label>假别*</ion-label>
