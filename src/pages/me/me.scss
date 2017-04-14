@@ -1,28 +1,23 @@
-$headImgSize: 100px;
-$headImgSize1: 70px;
+$headImgSize: 125px;
+$headImgSize1: 88px;
 $headImgSize3: 150px;
-.head{
-  height:40%;
-  color: #fff;
-  font-size: 150%;
-}
-.nav-head{
-  height:100%;
-  background-color: #3773F7;
-  position: relative;
-  text-align: center;
-  .headicon{
-    font-size:220%;
-    position: absolute;
-    right:5%;
-    top:15%;
+page-me{
+  .head{
+    height:40%;
+    color: #fff;
+    font-size: 150%;
   }
-  .pagehead{
+  .nav-head{
     height:100%;
-    width:100%;
-    position: absolute;
-    top: +15%;
-    z-index: 100;
+    background-color: #3773F7;
+    position: relative;
+    text-align: center;
+    .headicon{
+      font-size:220%;
+      position: absolute;
+      right:5%;
+      top:15%;
+    }
     .person{
       overflow: hidden;
       width:$headImgSize3;
@@ -30,6 +25,7 @@ $headImgSize3: 150px;
       border-radius: 2*$headImgSize3;
       margin-left: -$headImgSize3/2;
       position: absolute;
+      top: 16%;
       left:50%;
       border: solid 2px #fff;
       img{
@@ -37,71 +33,68 @@ $headImgSize3: 150px;
         height:100%;
       }
     }
-    .message{
-      margin-top: 1%;
-      &.first{
-        margin-top: $headImgSize3*1.1;
+    .pagehead{
+      display: flex;
+      flex-direction:column;
+      justify-content:flex-end;
+      height:98%;
+      width:100%;
+      .message{
+        margin-top: 1%;
       }
     }
   }
-}
-@media screen and (max-width:500px) {
-	.head{
-    font-size: 130%;
-    height:38%;
-    .nav-head{
-      .pagehead{
+  @media screen and (max-width:500px) {
+  	.head{
+      font-size: 130%;
+      .nav-head{
         .person{
           width:$headImgSize;
           height:$headImgSize;
           border-radius: 2*$headImgSize;
           margin-left: -$headImgSize/2;
         }
-        .message{
-          &.first{
-            margin-top: $headImgSize*1.1;
-          }
+      }
+    }
+  }
+  @media screen and (max-width:360px) {
+  	.head{
+      font-size: 130%;
+      .nav-head{
+        .person{
+          width:$headImgSize;
+          height:$headImgSize;
+          border-radius: 2*$headImgSize;
+          margin-left: -$headImgSize/2;
         }
       }
     }
   }
-}
-@media screen and (max-width:320px) {
-	.head{
-    font-size: 110%;
-    height:38%;
-    .nav-head{
-      .pagehead{
+  @media screen and (max-width:320px) {
+  	.head{
+      font-size: 110%;
+      .nav-head{
         .person{
           width:$headImgSize1;
           height:$headImgSize1;
           border-radius: 2*$headImgSize1;
           margin-left: -$headImgSize1/2;
         }
-        .message{
-          &.first{
-            margin-top: $headImgSize1*1.1;
-          }
-        }
+      }
+    }
+  }
+  .content1{
+    height:100%;
+    width:100%;
+    ion-list{
+      height:100%;
+      width:100%;
+      .function{
+        height:18%;
+      }
+      .function-message{
+        font-size: 150%;
       }
     }
   }
 }
-.content1{
-  height:100%;
-  width:100%;
-  ion-list{
-    height:100%;
-    width:100%;
-    .function{
-      height:18%;
-    }
-    .function-message{
-      font-size: 150%;
-    }
-  }
-}
-// button.test{
-//   background:url(../assets/images/head.jpg) no-repeat 0% 50%;
-//   background-size:10%;
-// }

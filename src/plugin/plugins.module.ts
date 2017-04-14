@@ -7,7 +7,9 @@ import { LocalNotifications } from '@ionic-native/local-notifications';
 import { Keyboard } from '@ionic-native/keyboard';
 import { BackgroundMode } from '@ionic-native/background-mode';
 import { Network } from '@ionic-native/network';
-
+import { Camera } from '@ionic-native/camera';
+import { Badge } from '@ionic-native/badge';
+import { PluginsService } from './plugins.service'
 @NgModule({
   imports:      [ CommonModule, IonicModule ],
   declarations: [
@@ -16,6 +18,6 @@ import { Network } from '@ionic-native/network';
   entryComponents:[
 
   ],
-  providers:    [ PowerManagement, Vibration, LocalNotifications, Keyboard, BackgroundMode, Network ]
+  providers:    [ PowerManagement, Vibration, LocalNotifications, Keyboard, BackgroundMode, Network, Camera, PluginsService, Badge ]
 })
 export class PluginsModule {}

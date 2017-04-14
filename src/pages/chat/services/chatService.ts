@@ -6,11 +6,8 @@ import { Config } from '../../../config/default';
 import { Storage } from '@ionic/storage';
 import { Chat } from '../interfaces/chat';
 import { Subject }           from 'rxjs/Subject';
-import { Vibration } from '@ionic-native/vibration';
 import { Network } from '@ionic-native/network';
-import { LocalNotifications } from '@ionic-native/local-notifications';
-import { Camera } from 'ionic-native';
-
+import { PluginsService } from '../../../plugin/plugins.service'
 @Injectable()
 export class ChatService {
 
@@ -24,14 +21,12 @@ export class ChatService {
   unSendMessages: any = [];
   tempMes: Chat[] = [];
   hasNet: boolean = true;
-  num:number = 1;
   constructor(
     private socket: Socket,
     private storage: Storage,
-    private vibration: Vibration,
     private network: Network,
     public toastCtrl: ToastController,
-    private localNotifications: LocalNotifications
+    private pluginsService: PluginsService
   ) {
     // 获取服务器时间
     this.getTime().subscribe((time) => {
@@ -77,46 +72,11 @@ export class ChatService {
       name: user.name
     })
   }
-  vibrate(newMes:any) {
-    setTimeout(() => {
-      this.localNotifications.schedule({
-        title: newMes.name,
-        text: newMes.content,
-        led: 'FF0000',
-      });
-      this.vibration.vibrate([200, 80, 200]);
-    }, 10)
-
+  notice(newMes:any) {
+    this.pluginsService.chatNotification(newMes,true)
   }
   getPicure(type:number) {
-    let options = {
-      //这些参数可能要配合着使用，比如选择了sourcetype是0，destinationtype要相应的设置
-      quality: 100,                                            //相片质量0-100
-      allowEdit: true,                                        //在选择之前允许修改截图
-      destinationType: Camera.DestinationType.DATA_URL,
-      sourceType: type,                                         //从哪里选择图片：PHOTOLIBRARY=0，相机拍照=1，SAVEDPHOTOALBUM=2。0和1其实都是本地图库
-      encodingType: Camera.EncodingType.JPEG,                   //保存的图片格式： JPEG = 0, PNG = 1
-      targetWidth: 200,                                        //照片宽度
-      targetHeight: 200,                                       //照片高度
-      mediaType: 0,                                             //可选媒体类型：圖片=0，只允许选择图片將返回指定DestinationType的参数。 視頻格式=1，允许选择视频，最终返回 FILE_URI。ALLMEDIA= 2，允许所有媒体类型的选择。
-      cameraDirection: 0,                                       //枪后摄像头类型：Back= 0,Front-facing = 1
-      saveToPhotoAlbum: true                                   //保存进手机相册
-    };
-    return Camera.getPicture(options).then((imageData) => {
-      // imageData is a base64 encoded string
-      let base64Image = "" + imageData;
-      return Promise.resolve(base64Image)
-      // this.fileTransfer.upload(this.base64Image, this.url + "user/update/picture", this.uploadOptions)
-      //   .then((data: any) => {
-      //     console.log(data.response);
-      //     this.serverPhoto = this.base64Image;
-      //     localStorage.setItem('newPicture',this.base64Image);
-      //   }, (err) => {
-      //     console.log('服务器没响应')
-      //   })
-    }, (err) => {
-      console.log(err);
-    });
+    return this.pluginsService.getPicure(type,200);
   }
   clearMes():void{
     let user: User = this.getUser();
@@ -176,12 +136,12 @@ export class ChatService {
         this.unReceiveTerms.next(true);
         if (newMes[0].fromId != this.getUser()._id) {
           this.hasGottenMes(newMes);
-          this.vibrate(newMes[newMes.length-1]);
+          this.notice(newMes[newMes.length-1]);
         }
       } else {
         if (newMes.fromId != this.getUser()._id) {
           this.hasGottenMes(newMes);
-          this.vibrate(newMes);
+          this.notice(newMes);
         }
       }
     });

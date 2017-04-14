@@ -49,8 +49,7 @@ export class DialoguePage implements OnInit, AfterViewChecked {
         this.list.push(obj);
       }
       this.ref.detectChanges();
-      let chatArea = document.getElementsByClassName('scroll-content')[2];
-      chatArea.scrollTop = chatArea.scrollHeight;
+      this.bottomScroll();
     });
     // 接收状态消息
     this.chatService.getStatus().subscribe((obj) => {
@@ -70,14 +69,15 @@ export class DialoguePage implements OnInit, AfterViewChecked {
 
     this.keyboard.onKeyboardShow().subscribe((e) => {
       if(!this.chatting) return;
-      let chatArea = document.getElementsByClassName('scroll-content')[2];
-      chatArea.scrollTop = chatArea.scrollHeight;
+      this.bottomScroll();
     })
   }
-
-  ngAfterViewChecked() {
+  bottomScroll() {
     let chatArea = document.getElementsByClassName('scroll-content')[2];
     chatArea.scrollTop = chatArea.scrollHeight;
+  }
+  ngAfterViewChecked() {
+    this.bottomScroll();
   }
   ionViewDidEnter() {
 
@@ -128,8 +128,7 @@ export class DialoguePage implements OnInit, AfterViewChecked {
 
   inputFocus() {
     this.addS = false;
-    let chatArea = document.getElementsByClassName('scroll-content')[2];
-    chatArea.scrollTop = chatArea.scrollHeight;
+    this.bottomScroll();
   }
   src1:any
   sendPicture() {

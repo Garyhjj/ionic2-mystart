@@ -1,8 +1,78 @@
-.tip{
-  color:yellow;
-  font-size: 75%;
-  margin-top: 6% !important;
-}
-.secHead{
-  padding-bottom: 20%;
+page-nine-code{
+  .tip{
+    color:yellow;
+    font-size: 75%;
+    margin-top: 6% !important;
+  }
+  .secHead{
+    padding-bottom: 20%;
+  }
+  .head{
+    height:40%;
+    color: #fff;
+    font-size: 150%;
+  }
+  .nav-head{
+    height:100%;
+    background-color: #3773F7;
+    position: relative;
+    text-align: center;
+    .headicon{
+      font-size:220%;
+      position: absolute;
+      right:5%;
+      top:15%;
+    }
+    .person{
+      overflow: hidden;
+      width:$headImgSize3;
+      height:$headImgSize3;
+      border-radius: 2*$headImgSize3;
+      margin-left: -$headImgSize3/2;
+      position: absolute;
+      top: 16%;
+      left:50%;
+      border: solid 2px #fff;
+      img{
+        width:100%;
+        height:100%;
+      }
+    }
+    .pagehead{
+      display: flex;
+      flex-direction:column;
+      justify-content:flex-end;
+      height:98%;
+      width:100%;
+      .message{
+        margin-top: 1%;
+      }
+    }
+  }
+  @media screen and (max-width:500px) {
+  	.head{
+      font-size: 130%;
+      .nav-head{
+        .person{
+          width:$headImgSize;
+          height:$headImgSize;
+          border-radius: 2*$headImgSize;
+          margin-left: -$headImgSize/2;
+        }
+      }
+    }
+  }
+  @media screen and (max-width:320px) {
+  	.head{
+      font-size: 110%;
+      .nav-head{
+        .person{
+          width:$headImgSize1;
+          height:$headImgSize1;
+          border-radius: 2*$headImgSize1;
+          margin-left: -$headImgSize1/2;
+        }
+      }
+    }
+  }
 }

@@ -12,11 +12,11 @@
     </ion-item>
   </ion-list>
   <div class="nav-head" *ngIf="user && isVal">
+    <div class="person">
+      <img [src]="url + user.photo">
+    </div>
     <div class="pagehead">
-      <ion-avatar class="person">
-        <img [src]="url + user.photo">
-      </ion-avatar>
-      <div class="message first">{{user.name}}</div>
+      <div class="message">{{user.name}}</div>
       <div class="message tip">{{message}}</div>
     </div>
   </div>

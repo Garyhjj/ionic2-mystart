@@ -24,6 +24,7 @@ export class TabsPage {
   }
 
   ionViewDidLoad() {
+    // this.chatService.clearMes();
     this.chatService.login();
     this.chatService.getOutLineMessages().subscribe((messages) => {
       this.chatService.updateOutlineMes(messages);
